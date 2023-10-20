@@ -12,7 +12,7 @@ public class Accounts {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  private String login;
+  private String username;
 
   private String email;
 
@@ -26,12 +26,12 @@ public class Accounts {
     this.id = id;
   }
 
-  public String getLogin() {
-    return login;
+  public String getUsername() {
+    return username;
   }
 
-  public void setLogin(String login) {
-    this.login = login;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public String getEmail() {
