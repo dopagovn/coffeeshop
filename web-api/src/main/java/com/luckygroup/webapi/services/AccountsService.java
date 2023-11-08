@@ -15,8 +15,9 @@ public class AccountsService {
     return accountsRepository.findById(id);
   }
 
-  public List<Accounts> getAllAccount() {
-    return accountsRepository.findAll();
+  public Optional<List<Accounts>> getAllAccount() {
+    List<Accounts> accounts = accountsRepository.findAll();
+    return Optional.ofNullable(accounts);
   }
 
   public AccountsService(AccountsRepository accountsRepository) {

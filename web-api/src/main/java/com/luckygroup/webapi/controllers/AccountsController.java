@@ -2,6 +2,7 @@ package com.luckygroup.webapi.controllers;
 
 import com.luckygroup.webapi.models.Accounts;
 import com.luckygroup.webapi.services.AccountsService;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,18 @@ public class AccountsController {
 
   @Autowired
   private AccountsService accountsService;
+
+  @GetMapping(path = "/accounts")
+  public ResponseEntity<?> getAllAccount() {
+    Optional<List<Accounts>> accounts = accountsService.getAllAccount();
+    if (accounts.isPresent()) {
+      return ResponseEntity.ok(accounts.get());
+    } else {
+      return ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .body("Account not found");
+    }
+  }
 
   @GetMapping(path = "/account")
   public ResponseEntity<?> getAccountById(@RequestParam Integer id) {
