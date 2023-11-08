@@ -3,9 +3,10 @@ package com.luckygroup.webapi.controllers;
 import com.luckygroup.webapi.models.Accounts;
 import com.luckygroup.webapi.services.AccountsService;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +23,16 @@ public class AccountsController {
   private AccountsService accountsService;
 
   @GetMapping(path = "/account")
-  public Accounts getPlayerById(@RequestParam(name = "id") Integer id) {
-    return accountsService.findById(id);
+  public ResponseEntity<?> getAccountById(@RequestParam Integer id) {
+    Optional<Accounts> accounts = accountsService.findById(id);
+
+    if (accounts.isPresent()) {
+      return ResponseEntity.ok(accounts.get());
+    } else {
+      return ResponseEntity
+        .status(HttpStatus.NOT_FOUND)
+        .body("Account not found");
+    }
   }
 
   @PostMapping(path = "/account/login")
