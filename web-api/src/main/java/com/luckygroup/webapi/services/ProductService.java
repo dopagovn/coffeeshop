@@ -39,9 +39,7 @@ public class ProductService {
     //     productRepository.deleteById(id);
     // }
 
-    // Bổ sung thêm các phương thức cần thiết tại đây
 
-    // Ví dụ:
     public Optional<List<Product>> getProductsByCategoryId(int categoryId) {
         List<Product> products = productRepository.findByCategoryId(categoryId);
         return Optional.ofNullable(products);

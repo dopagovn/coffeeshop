@@ -1,39 +1,46 @@
 package com.luckygroup.webapi.models;
 
-import java.util.*;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "payment")
 public class Payment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    @Column(name = "order_id")
     private int orderId;
 
+    @Column(name = "payment_method")
     private String paymentMethod;
 
+    @Column(name = "total_payment_amount")
     private double totalPaymentAmount;
 
-    private Date paymentDate;
+    @Column(name = "payment_date")
+    private java.sql.Date paymentDate;
 
+    @Column(name = "payment_status")
     private String paymentStatus;
 
-    // Constructors
+    // constructors
     public Payment() {
-        // Default constructor
+
     }
 
-    public Payment(int orderId, String paymentMethod, double totalPaymentAmount, Date paymentDate) {
+    public Payment(int orderId, String paymentMethod, double totalPaymentAmount, java.sql.Date paymentDate, String paymentStatus) {
         this.orderId = orderId;
         this.paymentMethod = paymentMethod;
         this.totalPaymentAmount = totalPaymentAmount;
         this.paymentDate = paymentDate;
+        this.paymentStatus = paymentStatus;
     }
 
-    // Getters and setters
-    public int getid() {
+    // getters and setters
+
+    public int getId() {
         return id;
     }
 
@@ -65,11 +72,11 @@ public class Payment {
         this.totalPaymentAmount = totalPaymentAmount;
     }
 
-    public Date getPaymentDate() {
+    public java.sql.Date getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(java.sql.Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 
