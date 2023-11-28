@@ -3,14 +3,14 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "order_detail")
-public class OderDetail {
+public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
-    @Column(name = "oder_id")
-    private int oderId;
+    @Column(name = "order_id")
+    private int orderId;
 
     @Column(name = "product_id")
     private int productId;
@@ -21,12 +21,12 @@ public class OderDetail {
     @Column(name = "product_price")
     private double productPrice;
     //contructer
-    public OderDetail() {
+    public OrderDetail() {
         
     };
-    public OderDetail(int orderDetailId,int oderId, int productId, int quantity,double productPrice) {
+    public OrderDetail(int orderDetailId,int orderId, int productId, int quantity,double productPrice) {
         
-        this.oderId = oderId;
+        this.orderId = orderId;
         this.productId = productId;
         this.quantity = quantity;
         this.productPrice = productPrice;
@@ -42,11 +42,11 @@ public class OderDetail {
     public void setId(int id) {
         this.id = id;
     }
-    public int getOderId() {
-        return oderId;
+    public int getOrderId() {
+        return orderId;
     }
-    public void setOderId(int oderId) {
-        this.oderId = oderId;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
     public int getProductId() {
         return productId;
