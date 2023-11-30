@@ -31,8 +31,8 @@ public class ProductController {
     }
 
     @GetMapping(path = "/product")
-    public ResponseEntity<?> getProductById(int productId) {
-        Optional<Product> product = productService.getProductById(productId);
+    public ResponseEntity<?> getProductById(int id) {
+        Optional<Product> product = productService.getProductById(id);
 
         if (product.isPresent()) {
             return ResponseEntity.ok(product.get());
@@ -49,11 +49,11 @@ public class ProductController {
         return ResponseEntity.ok("Product saved successfully");
     }
 
-    // @DeleteMapping(path = "/product")
-    // public ResponseEntity<String> deleteProduct(@RequestParam Long id) {
-    //     productService.deleteProduct(id);
-    //     return ResponseEntity.ok("Product deleted successfully");
-    // }
+    @DeleteMapping(path = "/product")
+    public ResponseEntity<String> deleteProduct(@RequestParam int id) {
+        productService.deleteProduct(id);
+        return ResponseEntity.ok("Product deleted successfully");
+    }
 
     // Bổ sung các phương thức khác tại đây
 

@@ -35,9 +35,9 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    // public void deleteProduct(Integer id) {
-    //     productRepository.deleteById(id);
-    // }
+    public void deleteProduct(int id) {
+        productRepository.deleteById(id);
+    }
 
     // Bổ sung thêm các phương thức cần thiết tại đây
 
