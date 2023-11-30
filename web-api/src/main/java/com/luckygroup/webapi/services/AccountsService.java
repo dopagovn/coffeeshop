@@ -2,15 +2,26 @@ package com.luckygroup.webapi.services;
 
 import com.luckygroup.webapi.models.Accounts;
 import com.luckygroup.webapi.repository.AccountsRepository;
+import com.luckygroup.webapi.services.HashPassword;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class AccountsService {
 
   private final AccountsRepository accountsRepository;
 
+  // Constructor
+  public AccountsService(AccountsRepository accountsRepository) {
+    this.accountsRepository = accountsRepository;
+  }
+
+  // Functional
   public Optional<Accounts> findById(Integer id) {
     return accountsRepository.findById(id);
   }
@@ -20,11 +31,7 @@ public class AccountsService {
     return Optional.ofNullable(accounts);
   }
 
-  public AccountsService(AccountsRepository accountsRepository) {
-    this.accountsRepository = accountsRepository;
-  }
-
-  private Accounts findByUsername(String username) {
+  public Accounts findByUsername(String username) {
     return accountsRepository.findByUsername(username);
   }
 
@@ -34,5 +41,11 @@ public class AccountsService {
       return true;
     }
     return false;
+  }
+
+  public void register(Accounts accounts) {
+    String hashedPassword = HashPassword.hashPassword(accounts.getPassword());
+    accounts.setPassword(hashedPassword);
+    accountsRepository.save(accounts);
   }
 }

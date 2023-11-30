@@ -9,14 +9,11 @@ import jakarta.persistence.Id;
 public class Accounts {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
 
-  private String username;
-
-  private String email;
-
-  private String password;
+  private String username, email, password;
+  private int role;
 
   public Integer getId() {
     return id;
@@ -48,5 +45,13 @@ public class Accounts {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public int getRole() {
+    return role;
+  }
+
+  public void setRole(int role) {
+    this.role = role;
   }
 }
