@@ -6,7 +6,7 @@ const Dashboard = () => {
             <div className="container-fluid py-4">
                 <div className="row">
                     <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-                        <div className="d">
+                        <div className="card">
                             <div className="card-body p-3">
                                 <div className="row">
                                     <div className="col-8">
@@ -116,7 +116,7 @@ const Dashboard = () => {
                                                 href="#"
                                             >
                                                 Read More
-                                                <i className="fas fa-arrow-right text-sm ms-1" aria-hidden="true" />
+                                                <i className="fas fa-arrow-right text-sm ms-1" aria-hidden />
                                             </a>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@ const Dashboard = () => {
                                         href="#"
                                     >
                                         Read More
-                                        <i className="fas fa-arrow-right text-sm ms-1" aria-hidden="true" />
+                                        <i className="fas fa-arrow-right text-sm ms-1" aria-hidden />
                                     </a>
                                 </div>
                             </div>
@@ -417,7 +417,7 @@ const Dashboard = () => {
                                     <div className="col-lg-6 col-7">
                                         <h6>Projects</h6>
                                         <p className="text-sm mb-0">
-                                            <i className="fa fa-check text-info" aria-hidden="true" />
+                                            <i className="fa fa-check text-info" aria-hidden />
                                             <span className="font-weight-bold ms-1">30 done</span> this month
                                         </p>
                                     </div>
@@ -867,7 +867,7 @@ const Dashboard = () => {
                             <div className="card-header pb-0">
                                 <h6>Orders overview</h6>
                                 <p className="text-sm">
-                                    <i className="fa fa-arrow-up text-success" aria-hidden="true" />
+                                    <i className="fa fa-arrow-up text-success" aria-hidden />
                                     <span className="font-weight-bold">24%</span> this month
                                 </p>
                             </div>
@@ -955,7 +955,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
-            <Script strategy="lazyOnload">
+            <Script>
                 {`var ctx = document.getElementById("chart-bars").getContext("2d");
 
 new Chart(ctx, {

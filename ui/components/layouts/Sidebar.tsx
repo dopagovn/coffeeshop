@@ -1,8 +1,15 @@
-import React from 'react';
+'use client';
+import React, { useState } from 'react';
+import Script from 'next/script';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type Props = {};
 
 const Sidebar = (props: Props) => {
+    const [active, setActive] = useState('active');
+    const pathName = usePathname();
+
     return (
         <>
             <aside
@@ -12,14 +19,10 @@ const Sidebar = (props: Props) => {
                 <div className="sidenav-header">
                     <i
                         className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
-                        aria-hidden="true"
+                        aria-hidden
                         id="iconSidenav"
                     />
-                    <a
-                        className="navbar-brand m-0"
-                        href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html"
-                        target="_blank"
-                    >
+                    <a className="navbar-brand m-0" href="#" target="_blank">
                         <img src="/assets/img/logo-ct.png" className="navbar-brand-img h-100" alt="main_logo" />
                         <span className="ms-1 font-weight-bold">Soft UI Dashboard</span>
                     </a>
@@ -28,7 +31,7 @@ const Sidebar = (props: Props) => {
                 <div className="collapse navbar-collapse w-auto max-height-vh-100 h-100" id="sidenav-collapse-main">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <a className="nav-link active" href="/">
+                            <Link className={`nav-link ${pathName == '/' ? 'active' : ''}`} href="/">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg
                                         width="12px"
@@ -62,10 +65,10 @@ const Sidebar = (props: Props) => {
                                     </svg>
                                 </div>
                                 <span className="nav-link-text ms-1">Dashboard</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/table">
+                            <Link className={`nav-link ${pathName == '/table' ? 'active' : ''}`} href="/table">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg
                                         width="12px"
@@ -99,7 +102,7 @@ const Sidebar = (props: Props) => {
                                     </svg>
                                 </div>
                                 <span className="nav-link-text ms-1">Tables</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/pages/billing.html">

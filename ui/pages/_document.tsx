@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
+import Sidebar from '../components/layouts/Sidebar';
 
 export default function Document() {
     return (
@@ -18,17 +19,18 @@ export default function Document() {
                 <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
             </Head>
 
-            <body className="g-sidenav-show bg-gray-100">
-                <Main />
+            <body className="g-sidenav-show bg-gray-100" style={{ overflow: 'visible' }}>
                 <NextScript />
+
                 <Script strategy="beforeInteractive" src="/assets/js/core/popper.min.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/core/bootstrap.min.js" />
-                <Script strategy="beforeInteractive" src="/assets/js/plugins/perfect-scrollbar.min.js" />
+                <Script strategy="afterInteractive" src="/assets/js/plugins/perfect-scrollbar.min.js" />
+                <Script strategy="beforeInteractive" src="/assets/js/soft-ui-dashboard.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/plugins/smooth-scrollbar.min.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/plugins/chartjs.min.js" />
-                <Script strategy="beforeInteractive" async defer src="https://buttons.github.io/buttons.js" />
+                <Script strategy="lazyOnload" async src="https://buttons.github.io/buttons.js" />
                 <Script strategy="beforeInteractive" async src="https://kit.fontawesome.com/42d5adcbca.js"></Script>
-                <Script strategy="beforeInteractive" async src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3" />
+                {/* <Script strategy="lazyOnload" async src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3" /> */}
 
                 <Script strategy="lazyOnload">
                     {`var win = navigator.platform.indexOf('Win') > -1;
@@ -39,6 +41,7 @@ export default function Document() {
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }`}
                 </Script>
+                <Main />
             </body>
         </Html>
     );

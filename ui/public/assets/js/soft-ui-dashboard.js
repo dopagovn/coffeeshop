@@ -1,6 +1,5 @@
 "use strict";
 (function () {
-
   var isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
   if (isWindows) {
@@ -110,6 +109,7 @@ total.forEach(function (item, i) {
   moving_div.style.transition = '.5s ease';
 
   item.onmouseover = function (event) {
+    console.log('click')
     let target = getEventTarget(event);
     let li = target.closest('li'); // get reference
     if (li) {
@@ -141,10 +141,8 @@ total.forEach(function (item, i) {
 
 window.addEventListener('resize', function (event) {
   total.forEach(function (item, i) {
-    console.log("Removing existing moving-tab element");
     item.querySelector('.moving-tab').remove();
     var moving_div = document.createElement('div');
-    console.log('Coloning active tab:')
     var tab = item.querySelector(".nav-link.active").cloneNode();
     tab.innerHTML = "-";
 
@@ -210,6 +208,7 @@ function sidebarColor(a) {
   var parent = a.parentElement.children;
   var color = a.getAttribute("data-color");
 
+
   for (var i = 0; i < parent.length; i++) {
     parent[i].classList.remove('active');
   }
@@ -223,17 +222,17 @@ function sidebarColor(a) {
   var sidebar = document.querySelector('.sidenav');
   sidebar.setAttribute("data-color", color);
 
-  var sidenavCard = document.querySelector('#sidenavCard');
-  let sidenavCardClasses = ['card', 'card-background', 'shadow-none', 'card-background-mask-' + color];
-  sidenavCard.className = '';
-  sidenavCard.classList.add(...sidenavCardClasses);
+  // var sidenavCard = document.querySelector('#sidenavCard');
+  // let sidenavCardClasses = ['card', 'card-background', 'shadow-none', 'card-background-mask-' + color];
+  // sidenavCard.className = '';
+  // sidenavCard.classList.add(...sidenavCardClasses);
 
-  var sidenavCardIcon = document.querySelector('#sidenavCardIcon');
-  let sidenavCardIconClasses = ['ni', 'ni-diamond', 'text-gradient', 'text-lg', 'top-0', 'text-' + color];
-  sidenavCardIcon.className = '';
-  sidenavCardIcon.classList.add(...sidenavCardIconClasses);
-
+  // var sidenavCardIcon = document.querySelector('#sidenavCardIcon');
+  // let sidenavCardIconClasses = ['ni', 'ni-diamond', 'text-gradient', 'text-lg', 'top-0', 'text-' + color];
+  // sidenavCardIcon.className = '';
+  // sidenavCardIcon.classList.add(...sidenavCardIconClasses);
 }
+
 
 // Set Navbar Fixed
 function navbarFixed(el) {
