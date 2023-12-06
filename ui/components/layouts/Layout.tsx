@@ -7,9 +7,9 @@ import Script from "next/script";
 const Layout = ({ children }: any) => {
   return (
     <>
-      <Header />
-      <main className="main">
-        <Sidebar />
+      <Sidebar />
+      <main className="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
+        <Header />
         <div className="content">{children}</div>
       </main>
       <Footer />

@@ -6,7 +6,7 @@ const Sidebar = (props: Props) => {
   return (
     <>
       <aside
-        className="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+        className="sidenav /navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
         id="sidenav-main"
       >
         <div className="sidenav-header">
@@ -21,7 +21,7 @@ const Sidebar = (props: Props) => {
             target="_blank"
           >
             <img
-              src="../assets/img/logo-ct.png"
+              src="/assets/img/logo-ct.png"
               className="navbar-brand-img h-100"
               alt="main_logo"
             />
@@ -35,7 +35,7 @@ const Sidebar = (props: Props) => {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" href="../pages/dashboard.html">
+              <a className="nav-link active" href="/dashboard">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -77,7 +77,7 @@ const Sidebar = (props: Props) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="../pages/tables.html">
+              <a className="nav-link" href="/pages/tables.html">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -122,7 +122,7 @@ const Sidebar = (props: Props) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="../pages/billing.html">
+              <a className="nav-link" href="/pages/billing.html">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -164,7 +164,7 @@ const Sidebar = (props: Props) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="../pages/virtual-reality.html">
+              <a className="nav-link" href="/pages/virtual-reality.html">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -210,7 +210,7 @@ const Sidebar = (props: Props) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="../pages/rtl.html">
+              <a className="nav-link" href="/pages/rtl.html">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -261,7 +261,7 @@ const Sidebar = (props: Props) => {
               </h6>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="../pages/profile.html">
+              <a className="nav-link" href="/pages/profile.html">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -307,7 +307,7 @@ const Sidebar = (props: Props) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="../pages/sign-in.html">
+              <a className="nav-link" href="/pages/sign-in.html">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -349,7 +349,7 @@ const Sidebar = (props: Props) => {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="../pages/sign-up.html">
+              <a className="nav-link" href="/pages/sign-up.html">
                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                   <svg
                     width="12px"
@@ -409,7 +409,7 @@ const Sidebar = (props: Props) => {
               className="full-background"
               style={{
                 backgroundImage:
-                  'url("../assets/img/curved-images/white-curved.jpeg")',
+                  'url("/assets/img/curved-images/white-curved.jpeg")',
               }}
             />
             <div className="card-body text-start p-3 w-100">

@@ -5,33 +5,20 @@ import { useEffect, useState } from "react";
 import Script from "next/script";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [showChild, setShowChild] = useState(false);
-
-  useEffect(() => {
-    setShowChild(true);
-  }, []);
-
-  if (!showChild) {
-    return null;
-  }
-  if (typeof window === "undefined") {
-    return <></>;
-  } else {
-    return (
-      <>
-        <Head>
-          <title>Dashboard | Graindashboard UI Kit</title>
-          <meta charSet="utf-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-        </Head>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </>
-    );
-  }
+  return (
+    <>
+      <Head>
+        <title>Dashboard | Graindashboard UI Kit</title>
+        <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+      </Head>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </>
+  );
 }

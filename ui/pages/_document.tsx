@@ -32,20 +32,14 @@ export default function Document() {
       <body className="g-sidenav-show bg-gray-100">
         <Main />
         <NextScript />
+        <Script strategy="lazyOnload" src="/assets/js/core/popper.min.js" />
+        <Script strategy="lazyOnload" src="/assets/js/core/bootstrap.min.js" />
         <Script
-          strategy="beforeInteractive"
-          src="/assets/js/core/popper.min.js"
-        />
-        <Script
-          strategy="beforeInteractive"
-          src="/assets/js/core/bootstrap.min.js"
-        />
-        <Script
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
           src="/assets/js/plugins/perfect-scrollbar.min.js"
         />
         <Script
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
           src="/assets/js/plugins/smooth-scrollbar.min.js"
         />
         <Script
@@ -53,7 +47,7 @@ export default function Document() {
           src="/assets/js/plugins/chartjs.min.js"
         />
         <Script
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
           async
           defer
           src="https://buttons.github.io/buttons.js"
@@ -63,6 +57,20 @@ export default function Document() {
           async
           src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3"
         />
+        <Script
+          strategy="lazyOnload"
+          async
+          src="https://kit.fontawesome.com/42d5adcbca.js"
+        ></Script>
+        <Script strategy="lazyOnload">
+          {`var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }`}
+        </Script>
       </body>
     </Html>
   );
