@@ -1,9 +1,6 @@
 import type { AppProps } from "next/app";
 import Layout from "../components/layouts/Layout";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import Script from "next/script";
-
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>

@@ -11,8 +11,8 @@ const Layout = ({ children }: any) => {
       <main className="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
         <Header />
         <div className="content">{children}</div>
+        <Footer />
       </main>
-      <Footer />
     </>
   );
 };

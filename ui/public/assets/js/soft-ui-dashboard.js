@@ -141,8 +141,10 @@ total.forEach(function (item, i) {
 
 window.addEventListener('resize', function (event) {
   total.forEach(function (item, i) {
+    console.log("Removing existing moving-tab element");
     item.querySelector('.moving-tab').remove();
     var moving_div = document.createElement('div');
+    console.log('Coloning active tab:')
     var tab = item.querySelector(".nav-link.active").cloneNode();
     tab.innerHTML = "-";
 
@@ -421,5 +423,3 @@ function sidenavTypeOnResize() {
     });
   }
 }
-
-export { navbarFixed }
