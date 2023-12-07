@@ -7,13 +7,13 @@ import { usePathname } from 'next/navigation';
 type Props = {};
 
 const Sidebar = (props: Props) => {
-    const [active, setActive] = useState('active');
     const pathName = usePathname();
 
     return (
         <>
             <aside
-                className="sidenav /navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+                className="sidenav /navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 o"
+                style={{ overflowY: 'hidden' }}
                 id="sidenav-main"
             >
                 <div className="sidenav-header">
@@ -354,6 +354,15 @@ const Sidebar = (props: Props) => {
                     </ul>
                 </div>
             </aside>
+            {/* <Script strategy="afterInteractive">
+                {`var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }`}
+            </Script> */}
         </>
     );
 };

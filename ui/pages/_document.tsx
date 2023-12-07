@@ -21,10 +21,10 @@ export default function Document() {
 
             <body className="g-sidenav-show bg-gray-100" style={{ overflow: 'visible' }}>
                 <NextScript />
-
+                {/* <Script strategy="afterInteractive" src="/assets/js/plugins/perfect-scrollbar.min.js" /> */}
                 <Script strategy="beforeInteractive" src="/assets/js/core/popper.min.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/core/bootstrap.min.js" />
-                <Script strategy="afterInteractive" src="/assets/js/plugins/perfect-scrollbar.min.js" />
+
                 <Script strategy="beforeInteractive" src="/assets/js/soft-ui-dashboard.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/plugins/smooth-scrollbar.min.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/plugins/chartjs.min.js" />

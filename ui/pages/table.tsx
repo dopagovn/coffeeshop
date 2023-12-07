@@ -65,7 +65,7 @@ const Table = (props: Props) => {
                                                 </td>
                                                 <td className="align-middle">
                                                     <a
-                                                        href="javascript:;"
+                                                        href="#"
                                                         className="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip"
                                                         data-original-title="Edit user"
@@ -108,7 +108,7 @@ const Table = (props: Props) => {
                                                 </td>
                                                 <td className="align-middle">
                                                     <a
-                                                        href="javascript:;"
+                                                        href="#"
                                                         className="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip"
                                                         data-original-title="Edit user"
@@ -149,7 +149,7 @@ const Table = (props: Props) => {
                                                 </td>
                                                 <td className="align-middle">
                                                     <a
-                                                        href="javascript:;"
+                                                        href="#"
                                                         className="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip"
                                                         data-original-title="Edit user"
@@ -190,7 +190,7 @@ const Table = (props: Props) => {
                                                 </td>
                                                 <td className="align-middle">
                                                     <a
-                                                        href="javascript:;"
+                                                        href="#"
                                                         className="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip"
                                                         data-original-title="Edit user"
@@ -233,7 +233,7 @@ const Table = (props: Props) => {
                                                 </td>
                                                 <td className="align-middle">
                                                     <a
-                                                        href="javascript:;"
+                                                        href="#"
                                                         className="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip"
                                                         data-original-title="Edit user"
@@ -276,7 +276,7 @@ const Table = (props: Props) => {
                                                 </td>
                                                 <td className="align-middle">
                                                     <a
-                                                        href="javascript:;"
+                                                        href="#"
                                                         className="text-secondary font-weight-bold text-xs"
                                                         data-toggle="tooltip"
                                                         data-original-title="Edit user"
