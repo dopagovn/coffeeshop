@@ -1,6 +1,7 @@
 package com.luckygroup.webapi.models;
 
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "payment")
@@ -18,19 +19,20 @@ public class Payment {
 
     @Column(name = "total_payment_amount")
     private double totalPaymentAmount;
-
+    
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "payment_date")
-    private java.sql.Date paymentDate;
+    private Date paymentDate;
 
     @Column(name = "payment_status")
     private String paymentStatus;
 
-    // constructors
+    //constructers
     public Payment() {
 
     }
 
-    public Payment(int orderId, String paymentMethod, double totalPaymentAmount, java.sql.Date paymentDate, String paymentStatus) {
+    public Payment(int orderId, String paymentMethod, double totalPaymentAmount, Date paymentDate, String paymentStatus) {
         this.orderId = orderId;
         this.paymentMethod = paymentMethod;
         this.totalPaymentAmount = totalPaymentAmount;
@@ -38,7 +40,7 @@ public class Payment {
         this.paymentStatus = paymentStatus;
     }
 
-    // getters and setters
+    // getters,setters
 
     public int getId() {
         return id;
@@ -72,11 +74,11 @@ public class Payment {
         this.totalPaymentAmount = totalPaymentAmount;
     }
 
-    public java.sql.Date getPaymentDate() {
+    public Date getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(java.sql.Date paymentDate) {
+    public void setPaymentDate(Date paymentDate) {
         this.paymentDate = paymentDate;
     }
 

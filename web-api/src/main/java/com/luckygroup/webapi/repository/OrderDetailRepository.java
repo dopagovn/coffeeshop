@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.luckygroup.webapi.models.OrderDetail;
 
 @Repository
-public interface OrderDetailRepository extends JpaRepository<OrderDetail, Long> {
+public interface OrderDetailRepository extends JpaRepository<OrderDetail, Integer> {
     Optional<OrderDetail> findById(int id);
     Optional<OrderDetail> findByOrderId(Integer orderId);
     Optional<OrderDetail> deleteById(int id);
