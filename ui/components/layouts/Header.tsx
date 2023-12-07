@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Header = () => {
     return (
@@ -32,10 +33,10 @@ const Header = () => {
                     </div>
                     <ul className="navbar-nav  justify-content-end">
                         <li className="nav-item d-flex align-items-center">
-                            <a href="#" className="nav-link text-body font-weight-bold px-0">
+                            <Link href='/login' className="nav-link text-body font-weight-bold px-0">
                                 <i className="fa fa-user me-sm-1" />
                                 <span className="d-sm-inline d-none">Sign In</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
                             <a href="#" className="nav-link text-body p-0" id="iconNavbarSidenav">

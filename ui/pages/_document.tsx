@@ -1,8 +1,18 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
-import Sidebar from '../components/layouts/Sidebar';
 
-export default function Document() {
+
+
+
+
+export default function Document({pathName}: any) {
+
+
+
+
+    
+
+
     return (
         <Html>
             <Head>
@@ -21,11 +31,13 @@ export default function Document() {
 
             <body className="g-sidenav-show bg-gray-100" style={{ overflow: 'visible' }}>
                 <NextScript />
-                {/* <Script strategy="afterInteractive" src="/assets/js/plugins/perfect-scrollbar.min.js" /> */}
+
                 <Script strategy="beforeInteractive" src="/assets/js/core/popper.min.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/core/bootstrap.min.js" />
 
-                <Script strategy="beforeInteractive" src="/assets/js/soft-ui-dashboard.js" />
+                <Script strategy="beforeInteractive" src="" />
+
+                <Script strategy="beforeInteractive" src="/assets/js/jquery-3.7.1.min.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/plugins/smooth-scrollbar.min.js" />
                 <Script strategy="beforeInteractive" src="/assets/js/plugins/chartjs.min.js" />
                 <Script strategy="lazyOnload" async src="https://buttons.github.io/buttons.js" />

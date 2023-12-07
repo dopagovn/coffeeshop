@@ -3,6 +3,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
+import { ScriptWithCleanup } from '../../utils/ScriptWithCleanup';
 
 const Layout = ({ children }: any) => {
     return (
@@ -155,6 +156,7 @@ const Layout = ({ children }: any) => {
                     </div>
                 </div>
             </main>
+            <ScriptWithCleanup src="/assets/js/soft-ui-dashboard.js" onLoad={() => console.log('Stripe script loaded')}/>
         </>
     );
 };
