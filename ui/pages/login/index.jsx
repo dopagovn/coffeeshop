@@ -2,10 +2,23 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-
+import ApiService from '../../utils/api.ts'
 
 
 const Login = () => {
+
+    const data = {
+        "categoryId": 7,
+        "productName": 3,
+        "productDescription": "khong co gi",
+        "productPrice": 89000.0,
+        "productImage": 1331,
+        "stockQuantity": 60000.0
+    }
+
+    const res = ApiService.post('/product', data);
+    console.log(res)
+
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
@@ -18,7 +31,7 @@ const Login = () => {
     };
 
     const handleSignIn = () => {
-        // Xử lý đăng nhập ở đây
+        
         console.log('User Name:', userName);
         console.log('Password:', password);
     };

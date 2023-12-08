@@ -60,9 +60,72 @@ class ApiService {
             });
 
             if (!!response && response.status == 200) {
-                console.log(response);
+              
                 return await response.json();
             }
+            await this.handleErrorException(response);
+        } catch (error) {
+            await this.handleErrorException(error);
+        }
+        return undefined;
+    };
+    post = async (url: string, data: any) => {
+        try {
+            const uri = this.getFullApiLink(url);
+            const headers = this.getRequestHeader();
+            const response = await fetch(uri, {
+                credentials: 'include',
+                method: 'POST',
+                headers,
+                body: JSON.stringify(data),
+            });
+
+            if (!!response && response.status === 200) {
+                return await response.json();
+            }
+
+            await this.handleErrorException(response);
+        } catch (error) {
+            await this.handleErrorException(error);
+        }
+        return undefined;
+    };
+    put = async (url: string, data: any) => {
+        try {
+            const uri = this.getFullApiLink(url);
+            const headers = this.getRequestHeader();
+            const response = await fetch(uri, {
+                credentials: 'include',
+                method: 'PUT',
+                headers,
+                body: JSON.stringify(data),
+            });
+
+            if (!!response && response.status === 200) {
+                return await response.json();
+            }
+
+            await this.handleErrorException(response);
+        } catch (error) {
+            await this.handleErrorException(error);
+        }
+        return undefined;
+    };
+
+    delete = async (url: string) => {
+        try {
+            const uri = this.getFullApiLink(url);
+            const headers = this.getRequestHeader();
+            const response = await fetch(uri, {
+                credentials: 'include',
+                method: 'DELETE',
+                headers,
+            });
+
+            if (!!response && response.status === 200) {
+                return await response.json();
+            }
+
             await this.handleErrorException(response);
         } catch (error) {
             await this.handleErrorException(error);
