@@ -1,6 +1,10 @@
 import Script from 'next/script';
+import ApiService from '../utils/api';
 
 const Dashboard = () => {
+    const pathUrl = ApiService.get('/accounts');
+
+    console.log(pathUrl);
     return (
         <>
             <div className="container-fluid py-4">
@@ -955,6 +959,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+
             <Script>
                 {`var ctx = document.getElementById("chart-bars").getContext("2d");
 
