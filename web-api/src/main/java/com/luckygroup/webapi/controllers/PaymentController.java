@@ -57,7 +57,6 @@ public class PaymentController {
 
     // Bổ sung các phương thức khác tại đây
 
-    // Ví dụ:
     @GetMapping(path = "/payment-by-orderId")
     public ResponseEntity<?> getPaymentByOrderId(@RequestParam Integer orderId) {
         Optional<Payment> payment = paymentService.getPaymentByOrderId(orderId);

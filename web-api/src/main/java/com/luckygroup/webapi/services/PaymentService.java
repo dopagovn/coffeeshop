@@ -39,8 +39,6 @@ public class PaymentService {
         paymentRepository.deleteById(id);
     }
 
-    // Bổ sung thêm các phương thức cần thiết tại đây
-
     public Optional<Payment> getPaymentByOrderId(Integer orderId) {
         return paymentRepository.findByOrderId(orderId);
     }

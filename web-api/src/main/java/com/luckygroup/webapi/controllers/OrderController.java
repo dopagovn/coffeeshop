@@ -63,6 +63,4 @@ public class OrderController {
             return new ResponseEntity<>("Order not found", HttpStatus.NOT_FOUND);
         }
     }
-
-    // Bổ sung thêm các phương thức và chức năng cần thiết tại đây
 }
