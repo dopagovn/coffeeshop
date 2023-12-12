@@ -105,7 +105,7 @@ const Sidebar = (props: Props) => {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="/pages/billing.html">
+                            <Link className={`nav-link ${pathName == '/payment' ? 'active' : ''}`} href="/payment">
                                 <div className="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                                     <svg
                                         width="12px"
@@ -138,8 +138,8 @@ const Sidebar = (props: Props) => {
                                         </g>
                                     </svg>
                                 </div>
-                                <span className="nav-link-text ms-1">Billing</span>
-                            </a>
+                                <span className="nav-link-text ms-1">Payment</span>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="/pages/virtual-reality.html">

@@ -2,15 +2,22 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+<<<<<<< HEAD
 import ApiService from '../../utils/api.ts'
+=======
+>>>>>>> a73c31d7fdbdf8861f6381f1ec534c6a630c82f7
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../../actions/product.jsx';
 
 
 const Login = () => {
 
+<<<<<<< HEAD
     const {data} = useSelector(state => state.product)
 
+=======
+    const {data} = useSelector(state => state.product);
+>>>>>>> a73c31d7fdbdf8861f6381f1ec534c6a630c82f7
     const dispatch = useDispatch();
 
 
@@ -49,7 +56,11 @@ const Login = () => {
                                         className="navbar-brand font-weight-bolder ms-lg-0 ms-3 "
                                         href="../pages/dashboard.html"
                                     >
+<<<<<<< HEAD
                                         Soft UI Dashboard {data[8].productDescription}
+=======
+                                        Soft UI Dashboard 
+>>>>>>> a73c31d7fdbdf8861f6381f1ec534c6a630c82f7
                                     </a>
                                     <button
                                         className="navbar-toggler shadow-none ms-2"
