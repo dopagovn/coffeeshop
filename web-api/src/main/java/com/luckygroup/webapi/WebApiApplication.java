@@ -1,8 +1,11 @@
 package com.luckygroup.webapi;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -27,5 +30,15 @@ public class WebApiApplication {
           .maxAge(3600);
       }
     };
+  }
+
+  @Configuration
+  public class ApplicationConfig {
+
+    @Bean
+    public ModelMapper modelMapper() {
+      ModelMapper modelMapper = new ModelMapper();
+      return modelMapper;
+    }
   }
 }
