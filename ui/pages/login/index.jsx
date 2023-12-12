@@ -1,23 +1,20 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ApiService from '../../utils/api.ts'
+import { useDispatch } from 'react-redux';
+import { getAllProducts } from '../../actions/product.jsx';
 
 
 const Login = () => {
 
-    const data = {
-        "categoryId": 7,
-        "productName": 3,
-        "productDescription": "khong co gi",
-        "productPrice": 89000.0,
-        "productImage": 1331,
-        "stockQuantity": 60000.0
-    }
+    const dispatch = useDispatch();
 
-    const res = ApiService.post('/product', data);
-    console.log(res)
+
+    useEffect(() => {
+        dispatch(getAllProducts());
+    }, [])
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -31,7 +28,7 @@ const Login = () => {
     };
 
     const handleSignIn = () => {
-        
+
         console.log('User Name:', userName);
         console.log('Password:', password);
     };
@@ -109,7 +106,7 @@ const Login = () => {
                                                             className="form-control"
                                                             placeholder="userName"
                                                             aria-label="userName"
-                                                            
+
                                                             value={userName}
                                                             onChange={handleUserNameChange}
                                                         />
@@ -121,7 +118,7 @@ const Login = () => {
                                                             className="form-control"
                                                             placeholder="Password"
                                                             aria-label="Password"
-                                                        
+
                                                             value={password}
                                                             onChange={handlePasswordChange}
                                                         />
