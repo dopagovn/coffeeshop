@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path = "/api/v1")
+@RequestMapping(path = "/api/v1/payments")
 public class PaymentController {
 
     @Autowired
     private PaymentService paymentService;
 
-    @GetMapping(path = "/payments")
+    @GetMapping
     public ResponseEntity<?> getAllPayments() {
         Optional<List<Payment>> payments = paymentService.getAllPayments();
         if (payments.isPresent()) {
@@ -30,8 +30,8 @@ public class PaymentController {
         }
     }
 
-    @GetMapping(path = "/payment")
-    public ResponseEntity<?> getPaymentById(@RequestParam Integer id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getPaymentById(@PathVariable Integer id) {
         Optional<Payment> payment = paymentService.findById(id);
 
         if (payment.isPresent()) {
@@ -43,21 +43,21 @@ public class PaymentController {
         }
     }
 
-    @PostMapping(path = "/payment")
+    @PostMapping
     public ResponseEntity<String> savePayment(@RequestBody Payment payment) {
         paymentService.savePayment(payment);
         return ResponseEntity.ok("Payment saved successfully");
     }
 
-    @DeleteMapping(path = "/payment")
-    public ResponseEntity<String> deletePayment(@RequestParam Integer id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePayment(@PathVariable Integer id) {
         paymentService.deletePayment(id);
         return ResponseEntity.ok("Payment deleted successfully");
     }
 
     // Bổ sung các phương thức khác tại đây
 
-    @GetMapping(path = "/payment-by-orderId")
+    @GetMapping("/by-orderId")
     public ResponseEntity<?> getPaymentByOrderId(@RequestParam Integer orderId) {
         Optional<Payment> payment = paymentService.getPaymentByOrderId(orderId);
         if (payment.isPresent()) {

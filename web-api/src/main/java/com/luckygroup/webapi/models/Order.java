@@ -22,6 +22,9 @@ public class Order {
 
     @Column(name = "order_status")
     private String orderStatus;
+    
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     // Constructors
     public Order() {
@@ -36,6 +39,7 @@ public class Order {
     }
 
     // Getters and Setters
+
     public int getOrderId() {
         return orderId;
     }
@@ -74,5 +78,9 @@ public class Order {
 
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
+    }
+
+    public double getTotalAmount() {
+        return getTotalOrderAmount();
     }
 }

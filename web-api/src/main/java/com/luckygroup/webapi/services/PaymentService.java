@@ -1,6 +1,8 @@
 package com.luckygroup.webapi.services;
 
+import com.luckygroup.webapi.models.Order;
 import com.luckygroup.webapi.models.Payment;
+import com.luckygroup.webapi.repository.OrderRepository;
 import com.luckygroup.webapi.repository.PaymentRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,10 +18,12 @@ import java.util.Optional;
 public class PaymentService {
 
     private final PaymentRepository paymentRepository;
+    private final OrderRepository orderRepository;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository) {
+    public PaymentService(PaymentRepository paymentRepository, OrderRepository orderRepository) {
         this.paymentRepository = paymentRepository;
+        this.orderRepository = orderRepository;
     }
 
     public Optional<Payment> findById(Integer id) {
@@ -41,5 +45,25 @@ public class PaymentService {
 
     public Optional<Payment> getPaymentByOrderId(Integer orderId) {
         return paymentRepository.findByOrderId(orderId);
+    }
+
+    public void makePayment(Integer orderId) {
+        Optional<Order> optionalOrder = orderRepository.findByOrderId(orderId);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+
+            // Kiểm tra xem lớp Order có phương thức getTotalAmount() không
+            if ("Hoàn thành".equals(order.getOrderStatus())) {
+                Payment payment = new Payment();
+                payment.setOrderId(orderId);
+                payment.setTotalPaymentAmount(order.getTotalAmount());
+                payment.setPaymentStatus("Chưa thanh toán");
+                paymentRepository.save(payment);
+            } else {
+                System.out.println("Không thể thanh toán đơn hàng với trạng thái hiện tại.");
+            }
+        } else {
+            System.out.println("Không tìm thấy đơn hàng với ID: " + orderId);
+        }
     }
 }

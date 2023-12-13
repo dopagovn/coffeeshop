@@ -20,6 +20,8 @@ public class OrderDetail {
 
     @Column(name = "product_price")
     private double productPrice;
+
+    
     //contructer
     public OrderDetail() {
         

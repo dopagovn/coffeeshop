@@ -16,5 +16,5 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findByOrderStatus(String orderStatus);
 
-    // Các phương thức tìm kiếm hoặc xóa khác có thể được thêm tùy thuộc vào yêu cầu cụ thể của bạn.
+    List<Order> findByOrderStatusAndCustomerInformation(String orderStatus, String customerInformation);
 }

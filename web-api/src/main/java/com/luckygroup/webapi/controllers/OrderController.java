@@ -63,4 +63,21 @@ public class OrderController {
             return new ResponseEntity<>("Order not found", HttpStatus.NOT_FOUND);
         }
     }
+
+    @PostMapping("/{orderId}/place")
+    public ResponseEntity<String> placeOrder(@PathVariable Integer orderId) {
+        Optional<Order> existingOrder = orderService.findByOrderId(orderId);
+        if (existingOrder.isPresent()) {
+            orderService.placeOrder(existingOrder.get());
+            return new ResponseEntity<>("Order placed successfully", HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Order not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PostMapping("/{orderId}/complete")
+    public ResponseEntity<String> completeOrder(@PathVariable Integer orderId) {
+        orderService.completeOrder(orderId);
+        return new ResponseEntity<>("Order completed successfully", HttpStatus.OK);
+    }
 }

@@ -1,6 +1,7 @@
 package com.luckygroup.webapi.repository;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,5 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
     Optional<Payment> findById(int id);
     Optional<Payment> findByOrderId(int orderId);
     Optional<Payment> deleteById(int id);
+    List<Payment> findByPaymentStatus(String paymentStatus);
 }

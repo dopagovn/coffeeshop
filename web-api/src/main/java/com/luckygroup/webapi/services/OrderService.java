@@ -38,10 +38,7 @@ public class OrderService {
     public void deleteOrder(Integer orderId) {
         orderRepository.deleteById(orderId);
     }
-
-    // Bổ sung thêm các phương thức cần thiết tại đây
-
-    // Ví dụ:
+    
     public Optional<List<Order>> getOrdersByCustomerInformation(String customerInformation) {
         List<Order> orders = orderRepository.findByCustomerInformation(customerInformation);
         return Optional.ofNullable(orders);
@@ -50,5 +47,34 @@ public class OrderService {
     public Optional<List<Order>> getOrdersByOrderStatus(String orderStatus) {
         List<Order> orders = orderRepository.findByOrderStatus(orderStatus);
         return Optional.ofNullable(orders);
+    }
+
+    public void placeOrder(Order order) {
+        // Thực hiện các kiểm tra cần thiết trước khi đặt đơn hàng
+
+        // Set trạng thái đơn hàng là "Đã đặt hàng"
+        order.setOrderStatus("Đã đặt hàng");
+
+        // Lưu đơn hàng vào cơ sở dữ liệu
+        orderRepository.save(order);
+    }
+
+    public void completeOrder(Integer orderId) {
+        Optional<Order> optionalOrder = orderRepository.findByOrderId(orderId);
+        if (optionalOrder.isPresent()) {
+            Order order = optionalOrder.get();
+
+            // Kiểm tra xem đơn hàng có trạng thái "Đã đặt hàng" hay không trước khi hoàn thành
+            if ("Đã đặt hàng".equals(order.getOrderStatus())) {
+                // Set trạng thái đơn hàng thành "Hoàn thành"
+                order.setOrderStatus("Hoàn thành");
+
+                // Lưu đơn hàng vào cơ sở dữ liệu
+                orderRepository.save(order);
+            } else {
+                // Xử lý khi đơn hàng không ở trạng thái đúng để hoàn thành
+                // (ví dụ: ném một exception hoặc trả về một thông báo lỗi)
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ public class Payment {
 
     @Column(name = "total_payment_amount")
     private double totalPaymentAmount;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "payment_date")
     private Date paymentDate;
@@ -27,7 +27,11 @@ public class Payment {
     @Column(name = "payment_status")
     private String paymentStatus;
 
-    //constructers
+    @OneToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "order_id")
+    private Order order;
+    
+    // Constructors
     public Payment() {
 
     }
@@ -40,7 +44,7 @@ public class Payment {
         this.paymentStatus = paymentStatus;
     }
 
-    // getters,setters
+    // Getters and Setters
 
     public int getId() {
         return id;
