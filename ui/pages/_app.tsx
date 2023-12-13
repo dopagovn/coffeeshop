@@ -7,20 +7,25 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import Order from './order';
 
 export default function App({ Component, pageProps }: AppProps) {
     const persistor = persistStore(store);
-    if (Component === Login) {
-        return (
-            <Provider store={store}>
-                <PersistGate persistor={persistor}>
-                    <Login />
-                </PersistGate>
-            </Provider>
-        );
-    }
-    if (Component === Register) {
-        return <Register />;
+
+    switch (Component) {
+        case Login:
+            return (
+                <Provider store={store}>
+                    <PersistGate persistor={persistor}>
+                        <Login />
+                    </PersistGate>
+                </Provider>
+            );
+        case Register:
+            return <Register />;
+        case Order:
+            return <Order />;
+        default:
     }
 
     return (
