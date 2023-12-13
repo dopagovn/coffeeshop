@@ -27,6 +27,7 @@ export default function Document({pathName}: any) {
                 <link href="/assets/css/nucleo-svg.css" rel="stylesheet" />
                 {/* CSS Files */}
                 <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
+                <link id="pagestyle" href="/assets/css/custom.css" rel="stylesheet" />
             </Head>
 
             <body className="g-sidenav-show bg-gray-100" style={{ overflow: 'visible' }}>

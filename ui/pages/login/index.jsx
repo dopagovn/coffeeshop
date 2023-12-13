@@ -8,13 +8,19 @@ import { getAllProducts } from '../../actions/product.jsx';
 
 const Login = () => {
 
+
     // const {data} = useSelector(state => state.product);
+
+    const { data } = useSelector(state => state.product);
+
     const dispatch = useDispatch();
 
 
     useEffect(() => {
         dispatch(getAllProducts());
     }, [])
+
+
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -45,7 +51,9 @@ const Login = () => {
                                         className="navbar-brand font-weight-bolder ms-lg-0 ms-3 "
                                         href="../pages/dashboard.html"
                                     >
+
                                         Soft UI Dashboard
+
                                     </a>
                                     <button
                                         className="navbar-toggler shadow-none ms-2"

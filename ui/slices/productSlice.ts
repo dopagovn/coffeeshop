@@ -7,14 +7,14 @@ const increment: CaseReducer<State, PayloadAction<any>> = (state, action) => sta
 const productSlice = createSlice({
     name: 'product',
     initialState: {
-        data: [],
+        products: [],
     },
     reducers: {
         increment,
     },
     extraReducers: (builder: any) => {
         builder.addCase(getAllProducts.fulfilled, (state: State, action: any) => {
-            state.data = action.payload;
+            state.products = action.payload;
         });
     },
 });
