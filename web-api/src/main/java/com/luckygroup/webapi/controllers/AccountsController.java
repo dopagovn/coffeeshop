@@ -1,10 +1,11 @@
 package com.luckygroup.webapi.controllers;
 
+import com.luckygroup.webapi.common.ResponseHandler;
 import com.luckygroup.webapi.models.Accounts;
 import com.luckygroup.webapi.services.AccountsService;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,51 +16,111 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "/api/v1")
 public class AccountsController {
 
-  @Autowired
   private AccountsService accountsService;
 
-  public AccountsController() {}
+  @Autowired
+  public AccountsController(AccountsService accountsService) {
+    this.accountsService = accountsService;
+  }
+
+  @GetMapping(path = "/account/{id}")
+  public ResponseEntity<Object> getAccountById(@PathVariable Long id) {
+    try {
+      Accounts accounts = accountsService.findAccountById(id);
+      return ResponseHandler.generateResponse(
+        HttpStatus.OK,
+        "Successful",
+        accounts
+      );
+    } catch (Exception e) {
+      return ResponseHandler.generateResponse(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        "Failed",
+        null
+      );
+    }
+  }
 
   @GetMapping(path = "/accounts")
-  public ResponseEntity<?> getAllAccount() {
-    Optional<List<Accounts>> accounts = accountsService.getAllAccount();
-    if (accounts.isPresent()) {
-      return ResponseEntity.ok(accounts.get());
-    } else {
-      return ResponseEntity
-        .status(HttpStatus.NOT_FOUND)
-        .body("Account not found");
+  public ResponseEntity<Object> getAllAccount() {
+    try {
+      List<Accounts> accounts = accountsService.getAllAccount();
+      return ResponseHandler.generateResponse(
+        HttpStatus.OK,
+        "Successful",
+        accounts
+      );
+    } catch (Exception e) {
+      return ResponseHandler.generateResponse(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        "Failed",
+        null
+      );
     }
   }
 
-  @GetMapping(path = "/account")
-  public ResponseEntity<?> getAccountById(@RequestParam Integer id) {
-    Optional<Accounts> accounts = accountsService.findById(id);
+  @PostMapping("/account/login")
+  public ResponseEntity<Object> loginAccount(@RequestBody Accounts accounts) {
+    try {
+      Optional<Accounts> account = accountsService.loginAccount(
+        accounts.getEmail(),
+        accounts.getPassword()
+      );
 
-    if (accounts.isPresent()) {
-      return ResponseEntity.ok(accounts.get());
-    } else {
-      return ResponseEntity
-        .status(HttpStatus.NOT_FOUND)
-        .body("Account not found");
+      if (account.isPresent()) {
+        return ResponseHandler.generateResponse(
+          HttpStatus.OK,
+          "Login success",
+          account
+        );
+      }
+      return ResponseHandler.generateResponse(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        "Wrong password",
+        null
+      );
+    } catch (Exception e) {
+      return ResponseHandler.generateResponse(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        "Cannot find account",
+        null
+      );
     }
   }
 
-  @PostMapping(path = "/account/login")
-  public ResponseEntity<String> login(
-    @RequestBody Map<String, String> credentials
+  @PostMapping("/account/register")
+  public ResponseEntity<Object> registerAccount(
+    @RequestBody Accounts accounts
   ) {
-    String username = credentials.get("username");
-    String password = credentials.get("password");
-    if (accountsService.login(username, password)) {
-      return ResponseEntity.ok("Login successful");
-    }
-    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
-  }
+    try {
+      Accounts account = accountsService.registerAccount(accounts);
 
-  @PostMapping(path = "/account/register")
-  public ResponseEntity<String> register(@RequestBody Accounts accounts) {
-    accountsService.register(accounts);
-    return ResponseEntity.ok("Register successful!");
+      if (
+        account.getEmail().isEmpty() ||
+        account.getAddress().isEmpty() ||
+        account.getBirthDate() == null ||
+        account.getFirstName().isEmpty() ||
+        account.getLastName().isEmpty() ||
+        account.getPhone().isEmpty()
+      ) {
+        return ResponseHandler.generateResponse(
+          HttpStatus.INTERNAL_SERVER_ERROR,
+          "Vui lòng điền đầy đủ thông tin!",
+          null
+        );
+      }
+
+      return ResponseHandler.generateResponse(
+        HttpStatus.OK,
+        "Đăng ký thành công!",
+        account
+      );
+    } catch (Exception e) {
+      return ResponseHandler.generateResponse(
+        HttpStatus.INTERNAL_SERVER_ERROR,
+        "Cannot create account",
+        null
+      );
+    }
   }
 }

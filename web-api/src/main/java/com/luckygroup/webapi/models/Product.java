@@ -28,6 +28,7 @@ public class Product {
 
     // Constructors
     public Product() {
+        super();
     }
 
     public Product(int categoryId, String productName, String productDescription, double productPrice, String productImage, int stockQuantity) {

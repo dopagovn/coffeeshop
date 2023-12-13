@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AccountsRepository extends JpaRepository<Accounts, Long> {
-  Accounts findByUsername(String username);
-  Optional<Accounts> findById(Integer id);
+  Optional<Accounts> findById(Long id);
+  Optional<Accounts> findByEmail(String email);
 }
