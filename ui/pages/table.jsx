@@ -8,15 +8,11 @@ import { getAllCategories } from '../actions/category';
 
 
 const Table = () => {
-    const { products } = useSelector(state => state.product)
+    const { data } = useSelector(state => state.product.products)
     const { accounts } = useSelector(state => state.account)
     const { categorys } = useSelector(state => state.category)
 
-
-    // console.log(data1)
-
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         dispatch(getAllProducts());
@@ -36,20 +32,20 @@ const Table = () => {
                     <div className="col-12">
                         <div className="card mb-4">
                             <div className="card-header px-4 ">
-                            <div    className="row gx-6">
-                            <div className="col-6">
-                                    <h6>Products table</h6>
+                                <div className="row gx-6">
+                                    <div className="col-6">
+                                        <h6>Products table</h6>
+                                    </div>
+                                    <div className="col-6"> {/* Change col-sm to col-sm-auto */}
+                                        <div className="input-container ms-12">
+                                            <input type="text" name="text" className="input" />
+                                            <label className="label">Search</label>
+                                            <div className="top-line" />
+                                            <div className="under-line" />
+                                        </div>
+                                    </div>
                                 </div>
-      <div className="col-6"> {/* Change col-sm to col-sm-auto */}
-        <div className="input-container ms-12">
-          <input type="text" name="text" className="input" />
-          <label className="label">Search</label>
-          <div className="top-line" />
-          <div className="under-line" />
-        </div>
-    </div>
-                            </div>
-     
+
 
                             </div>
                             <div className="card-body px-0 pt-0 pb-2">
@@ -77,7 +73,7 @@ const Table = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {products.map((product, index) => (
+                                            {(data) ? data.map((product, index) => (
                                                 <tr key={index}>
                                                     <td>
                                                         <p className="text-center font-weight-bold mb-0">{product.id}</p>
@@ -112,7 +108,8 @@ const Table = () => {
                                                         <span className="badge badge-sm bg-gradient-success">{product.productPrice} ₫</span>
                                                     </td>
                                                 </tr>
-                                            ))}
+                                            )) : "Null"
+                                            }
 
                                         </tbody>
                                     </table>
@@ -145,7 +142,7 @@ const Table = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {categorys.map((category, index) => (
+                                            {categorys ? categorys.map((category, index) => (
                                                 <tr key={index}>
                                                     <td>
                                                         <p className="text-center font-weight-bold mb-0">{category.id}</p>
@@ -155,7 +152,10 @@ const Table = () => {
                                                     </td>
 
                                                 </tr>
-                                            ))}
+                                            ))
+                                                :
+                                                "Khong co gi"
+                                            }
 
                                         </tbody>
                                     </table>
