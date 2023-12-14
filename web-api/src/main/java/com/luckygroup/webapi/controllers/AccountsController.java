@@ -6,10 +6,6 @@ import com.luckygroup.webapi.services.AccountsService;
 import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-<<<<<<< HEAD
-=======
-
->>>>>>> e6c7b7dc597c2d41c67652fae533c6d4d935b6cc
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
