@@ -10,4 +10,5 @@ public interface AccountsService {
   List<Accounts> getAllAccount();
   Optional<Accounts> loginAccount(String email, String password);
   Accounts registerAccount(Accounts accounts);
+  Accounts updateAccount(Accounts accounts);
 }

@@ -85,4 +85,10 @@ public class AccountServiceImpl implements AccountsService {
       throw new ResourceNotFoundException("Failed to register account", e);
     }
   }
+
+  @Override
+  public Accounts updateAccount(Accounts accounts) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'updateAccount'");
+  }
 }
