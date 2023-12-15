@@ -1,5 +1,6 @@
 package com.luckygroup.webapi;
 
+import com.luckygroup.webapi.utils.JwtUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +14,9 @@ public class WebApiApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(WebApiApplication.class, args);
+    JwtUtils jwtUtils = new JwtUtils();
+
+    System.out.println(jwtUtils.generatorToken("dopagovn@gmail.com"));
   }
 
   @Bean
