@@ -1,5 +1,6 @@
 package com.luckygroup.webapi.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +12,6 @@ import com.luckygroup.webapi.models.Category;
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     Optional<Category> findById(int id);
-    Optional<Category> findByName( String name);
+    List<Category> findByName(String name);
     Optional<Category> deleteById(int id);
 }

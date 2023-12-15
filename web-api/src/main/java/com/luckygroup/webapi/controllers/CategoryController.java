@@ -1,5 +1,6 @@
 package com.luckygroup.webapi.controllers;
 
+import com.luckygroup.webapi.common.ResponseHandler;
 import com.luckygroup.webapi.models.Category;
 import com.luckygroup.webapi.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,64 +10,108 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/api/v1")
 public class CategoryController {
 
-    @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    @GetMapping(path = "/category/{id}")
+    public ResponseEntity<Object> getCategoryById(@PathVariable Long id) {
+        try {
+            Category category = categoryService.findCategoryById(id);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Successful",
+                    category
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed",
+                    null
+            );
+        }
+    }
+
     @GetMapping(path = "/categories")
-    public ResponseEntity<?> getAllCategories() {
-        Optional<List<Category>> categories = categoryService.getAllCategories();
-        if (categories.isPresent()) {
-            return ResponseEntity.ok(categories.get());
-        } else {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Categories not found");
+    public ResponseEntity<Object> getAllCategories() {
+        try {
+            List<Category> categories = categoryService.getAllCategories();
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Successful",
+                    categories
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed",
+                    null
+            );
         }
     }
 
-    @GetMapping(path = "/category")
-    public ResponseEntity<?> getCategoryById(@RequestParam int id) {
-        Optional<Category> category = categoryService.getCategoryById(id);
-
-        if (category.isPresent()) {
-            return ResponseEntity.ok(category.get());
-        } else {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Category not found");
+    @PostMapping("/category")
+    public ResponseEntity<Object> saveCategory(@RequestBody Category category) {
+        try {
+            Category savedCategory = categoryService.saveCategory(category);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Category saved successfully",
+                    savedCategory
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Cannot save category",
+                    null
+            );
         }
     }
 
-    @PostMapping(path = "/category")
-    public ResponseEntity<String> saveCategory(@RequestBody Category category) {
-        categoryService.saveCategory(category);
-        return ResponseEntity.ok("Category saved successfully");
+    @DeleteMapping("/category/{id}")
+    public ResponseEntity<Object> deleteCategory(@PathVariable Long id) {
+        try {
+            categoryService.deleteCategory(id);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Category deleted successfully",
+                    null
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Cannot delete category",
+                    null
+            );
+        }
     }
 
-    @DeleteMapping(path = "/category")
-    public ResponseEntity<String> deleteCategory(@RequestParam int id) {
-        categoryService.deleteCategory(id);
-        return ResponseEntity.ok("Category deleted successfully");
-    }
+    // Bổ sung các phương thức khác tại đây
 
-    // Additional methods can be added here
-
-    // Example:
-    @GetMapping(path = "/categories-by-name")
-    public ResponseEntity<?> getCategoriesByName(@RequestParam String name) {
-        Optional<Category> categories = categoryService.getCategoriesByName(name);
-        if (!categories.isEmpty()) {
-            return ResponseEntity.ok(categories);
-        } else {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("Categories not found for the given name");
+    // Ví dụ:
+    @GetMapping(path = "/categories-by-name/{name}")
+    public ResponseEntity<Object> getCategoriesByName(@PathVariable String name) {
+        try {
+            List<Category> categories = categoryService.getCategoriesByName(name);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Successful",
+                    categories
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed",
+                    null
+            );
         }
     }
 }
