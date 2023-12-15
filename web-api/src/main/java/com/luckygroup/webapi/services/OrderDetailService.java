@@ -4,8 +4,9 @@ import com.luckygroup.webapi.models.OrderDetail;
 import java.util.List;
 
 public interface OrderDetailService {
-  OrderDetail getOrderDetailById(Long id);
-  List<OrderDetail> getAllOrder();
-  OrderDetail deleteOrderDetail(int id);
-  OrderDetail getOrderDetailsByOrderId(int orderId);
+  List<OrderDetail> getAllOrderDetails();
+  List<OrderDetail> findOrderDetailsByOrderId(int orderId);
+  OrderDetail findById(int id);
+  OrderDetail saveOrderDetail(OrderDetail orderDetail);
+  void deleteOrderDetail(Integer id);
 }

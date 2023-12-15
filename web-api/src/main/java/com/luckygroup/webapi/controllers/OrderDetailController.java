@@ -3,7 +3,6 @@ package com.luckygroup.webapi.controllers;
 import com.luckygroup.webapi.common.ResponseHandler;
 import com.luckygroup.webapi.models.Accounts;
 import com.luckygroup.webapi.models.OrderDetail;
-import com.luckygroup.webapi.services.AccountsService;
 import com.luckygroup.webapi.services.OrderDetailService;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -14,58 +13,54 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(path = "/api/v1")
 public class OrderDetailController {
 
-  @Autowired
-  private OrderDetailService orderDetailService;
+    private OrderDetailService orderDetailService;
 
-  @Autowired
-  public OrderDetailController(OrderDetailService orderDetailService) {
-    this.orderDetailService = orderDetailService;
-  }
-
-  @GetMapping(path = "/order-details")
-  public ResponseEntity<Object> getAllOrderDetails() {
-    List<OrderDetail> orderDetails = orderDetailService.getAllOrder();
-    if (orderDetails.isEmpty()) {
-      return ResponseHandler.generateResponse(
-        HttpStatus.NOT_FOUND,
-        "Không có dữ liệu nào!",
-        null
-      );
-    } else {
-      return ResponseHandler.generateResponse(
-        HttpStatus.OK,
-        "Thành công",
-        orderDetails
-      );
+    @Autowired
+    public OrderDetailController(OrderDetailService orderDetailService) {
+        this.orderDetailService = orderDetailService;
     }
   }
 
-  @GetMapping(path = "/order-detail/{id}")
-  public ResponseEntity<Object> getOrderDetailById(@PathVariable Long id) {
-    try {
-      OrderDetail orderDetail = orderDetailService.getOrderDetailById(id);
-      if (orderDetail == null) {
-        return ResponseHandler.generateResponse(
-          HttpStatus.NOT_FOUND,
-          "Don't have any order",
-          null
-        );
-      }
-      return ResponseHandler.generateResponse(
-        HttpStatus.OK,
-        "Successful",
-        orderDetail
-      );
-    } catch (Exception e) {
-      return ResponseHandler.generateResponse(
-        HttpStatus.NOT_FOUND,
-        "Failed",
-        null
-      );
+    @GetMapping(path = "/order-detail/{id}")
+    public ResponseEntity<Object> getOrderDetailById(@PathVariable int id) {
+        try {
+            OrderDetail orderDetail = orderDetailService.findById(id);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Successful",
+                    orderDetail
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed",
+                    null
+            );
+        }
+    }
+
+    @GetMapping(path = "/order-details")
+    public ResponseEntity<Object> getAllOrderDetails() {
+        try {
+            List<OrderDetail> orderDetails = orderDetailService.getAllOrderDetails();
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Successful",
+                    orderDetails
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed",
+                    null
+            );
+        }
     }
   }
   // @PostMapping(path = "/order-detail")
@@ -74,24 +69,60 @@ public class OrderDetailController {
   //     return ResponseEntity.ok("Order detail saved successfully");
   // }
 
-  // @DeleteMapping(path = "/order-detail")
-  // public ResponseEntity<String> deleteOrderDetail(@RequestParam Integer id) {
-  //     orderDetailService.deleteOrderDetail(id);
-  //     return ResponseEntity.ok("Order detail deleted successfully");
-  // }
+    @PostMapping("/order-detail")
+    public ResponseEntity<Object> saveOrderDetail(@RequestBody OrderDetail orderDetail) {
+        try {
+            OrderDetail savedOrderDetail = orderDetailService.saveOrderDetail(orderDetail);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Order detail saved successfully",
+                    savedOrderDetail
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Cannot save order detail",
+                    null
+            );
+        }
+    }
 
-  // // Bổ sung các phương thức khác tại đây
+    @DeleteMapping("/order-detail/{id}")
+    public ResponseEntity<Object> deleteOrderDetail(@PathVariable int id) {
+        try {
+            orderDetailService.deleteOrderDetail(id);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Order detail deleted successfully",
+                    null
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Cannot delete order detail",
+                    null
+            );
+        }
+    }
 
-  // // Ví dụ:
-  // @GetMapping(path = "/order-detail-by-orderId")
-  // public ResponseEntity<?> getOrderDetailsByOrderId(@RequestParam Integer orderId) {
-  //     Optional<OrderDetail> orderDetails = orderDetailService.getOrderDetailsByOrderId(orderId);
-  //     if (!orderDetails.isEmpty()) {
-  //         return ResponseEntity.ok(orderDetails);
-  //     } else {
-  //         return ResponseEntity
-  //                 .status(HttpStatus.NOT_FOUND)
-  //                 .body("Order details not found for the given order ID");
-  //     }
-  // }
+    // Add other methods as needed
+
+    // Example:
+    @GetMapping(path = "/order-details-by-order/{orderId}")
+    public ResponseEntity<Object> getOrderDetailsByOrderId(@PathVariable int orderId) {
+        try {
+            List<OrderDetail> orderDetails = orderDetailService.findOrderDetailsByOrderId(orderId);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Successful",
+                    orderDetails
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed",
+                    null
+            );
+        }
+    }
 }
