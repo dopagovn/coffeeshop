@@ -10,13 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.Paths;
-import java.util.List;
-import java.nio.file.Path;
-import java.io.IOException;
-import java.nio.file.Files;
 
-import java.nio.file.StandardCopyOption;
+import java.util.List;
+
+import java.io.IOException;
+
 
 @Controller
 @RequestMapping(path = "/api/v1")
@@ -129,7 +127,7 @@ public class ProductController {
 
     //         return ResponseHandler.generateResponse(
 
-    @PostMapping("/upload-image")
+    @PostMapping("/product")
     public ResponseEntity<Object> handleImageUpload(@RequestParam("file") MultipartFile file,
                                                    @RequestParam("productJson") String productJson) {
         try {
