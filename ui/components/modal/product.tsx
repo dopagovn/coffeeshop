@@ -9,6 +9,7 @@ type Props = {
     productData: any;
     onCreateProduct: any;
     handleChange: any;
+    categories: any;
 };
 
 const Modal = (props: Props) => {
@@ -57,8 +58,11 @@ const Modal = (props: Props) => {
                                 <div className="form-group">
                                     <label htmlFor="">Select category</label>
                                     <select name="" id="" className="form-control">
-                                        <option value="">Cà phê</option>
-                                        <option value="">Trà sữa</option>
+                                        {props.categories.map((category: any) => (
+                                            <option value={category.id} key={category.id} defaultValue={category.id}>
+                                                {category.name}
+                                            </option>
+                                        ))}
                                     </select>
                                 </div>
                             </div>
@@ -103,7 +107,7 @@ const Modal = (props: Props) => {
                                     <label htmlFor="" className="form-contol-label">
                                         Product image
                                     </label>
-                                    <input type="text" className="form-control" placeholder="Product name" />
+                                    <input type="file" className="form-control" />
                                 </div>
                             </div>
                             <div className="col">

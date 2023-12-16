@@ -9,9 +9,10 @@ export const getAllProducts = createAsyncThunk('products/get', async () => {
 });
 
 export const createProduct = createAsyncThunk('product/post', async (data) => {
-    const response = await ApiService.post('/product', data);
+    const response = await ApiService.uploadImage('/product', data);
     return response;
 });
+
 export const deleteProduct = createAsyncThunk('product/delete', async (id) => {
     const response = await ApiService.delete(`/product/${id}`);
     return response;
