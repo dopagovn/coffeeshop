@@ -68,3 +68,15 @@
     transform: scale(1);
     transition: all 0.5s;
   }
+
+  .formbold-dropzone {
+    border: 2px dashed #cccccc;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .formbold-dropzone p {
+    margin: 0;
+  }
+  

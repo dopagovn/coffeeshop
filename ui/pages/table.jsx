@@ -7,21 +7,28 @@ import { getAllAccounts } from '../actions/account';
 import { getAllCategories } from '../actions/category';
 import { Modal } from 'react-bootstrap';
 
+
 // import Image from 'next/image';
 
 const Table = () => {
+    
     const { products } = useSelector((state) => state.product);
-    // const { accounts } = useSelector(state => state.account)
+    
     const { categories } = useSelector((state) => state.category);
     const [searchTerm, setSearchTerm] = useState('');
     const [showModal, setShowModal] = useState(false);
-    // xử lí trong modal
-    // const [name, setName] = useState('');
-    // const [category, setCategory] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [price, setPrice] = useState('');
-    // const [image, setImage] = useState('');
-    // const [quantity, setQuantity] = useState('');
+    const [productImage, setProductImage] = useState(false);
+
+
+    useEffect(() => {
+      
+    
+      return () => {
+        productImage && URL.revokeObjectURL(productImage.preview);
+      }
+    }, [productImage])
+    
+
 
     const [newProduct, setNewProduct] = useState({
         categoryId: '1',
@@ -33,42 +40,58 @@ const Table = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value, files } = e.target;
+        const { name, value } = e.target;
 
-        if (name === 'productImage' && files.length > 0) {
-            const file = files[0];
+        setNewProduct({ ...newProduct, [name]: value });
+    };
 
-            console.log('Selected File:', file.name);
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        file.preview =  URL.createObjectURL(file)
+        setProductImage(file)
+        console.log(URL.createObjectURL(file))
+      };
 
-            setNewProduct({ ...newProduct, [name]: file });
-        } else {
-            setNewProduct({ ...newProduct, [name]: value });
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+    
+        // Tạo một đối tượng FormData để gửi tệp hình ảnh
+        const formData = new FormData();
+        formData.append('image', productImage); // 'image' nên phù hợp với trường được mong đợi trong API của bạn
+    
+        // Thêm các trường dữ liệu khác vào FormData
+        formData.append('categoryId', newProduct.categoryId);
+        formData.append('productName', newProduct.productName);
+        formData.append('productDescription', newProduct.productDescription);
+        formData.append('productPrice', newProduct.productPrice);
+        formData.append('stockQuantity', newProduct.stockQuantity);
+    
+        try {
+            // Gửi dữ liệu form đến điểm cuối API bằng ApiService hoặc bất kỳ thư viện HTTP nào (axios, fetch, v.v.)
+            const response = await ApiService.uploadImage('/upload-image', formData);
+    
+            // Xử lý phản hồi từ API theo cách cần thiết
+            console.log('Hình ảnh đã được tải lên thành công:', response);
+    
+            // Phần còn lại của mã của bạn...
+        } catch (error) {
+            console.error('Lỗi khi tải lên hình ảnh:', error);
         }
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Form Data:', newProduct);
-        dispatch(createProduct(newProduct));
-        setNewProduct({
-            categoryId: '',
-            productName: '',
-            productDescription: '',
-            productPrice: '',
-            productImage: '',
-            stockQuantity: '',
-        });
-
-        // Đóng modal sau khi submit
-        handleCloseModal();
-
-        // Làm mới danh sách sản phẩm (nếu cần)
-        dispatch(getAllProducts());
-    };
-
+    
+      
     const handleDelete = (id) => {
-        dispatch(deleteProduct(id));
-        dispatch(getAllProducts());
+        dispatch(deleteProduct(id))
+            .then(() => {
+                setDeleteSuccess(true);
+                setTimeout(() => {
+                    setDeleteSuccess(false);
+                }, 3000); // Hide alert after 3 seconds
+                dispatch(getAllProducts());
+            })
+            .catch((error) => {
+                console.error('Error deleting product:', error);
+            });
     };
 
     const dispatch = useDispatch();
@@ -95,20 +118,28 @@ const Table = () => {
     const handleCloseModal = () => {
         setShowModal(false);
     };
+    const [deleteSuccess, setDeleteSuccess] = useState(false);
     return (
         <div>
             <div className="container-fluid py-4">
-                <div className="alert alert-success alert-dismissible fade show" role="alert">
-                    <span className="alert-icon">
-                        <i className="ni ni-like-2" />
-                    </span>
-                    <span className="alert-text">
-                        <strong>Success!</strong> This is a success alert—check it out!
-                    </span>
-                    <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
+                {deleteSuccess && (
+                    <div className="alert alert-success alert-dismissible fade show" role="alert">
+                        <span className="alert-icon">
+                            <i className="ni ni-like-2" />
+                        </span>
+                        <span className="alert-text">
+                            <strong>Success!</strong> Product deleted successfully.
+                        </span>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => setDeleteSuccess(false)}
+                            aria-label="Close"
+                        >
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                )}
 
                 {/* bảng product */}
                 <div className="row">
@@ -186,8 +217,8 @@ const Table = () => {
                                                         <div className="d-flex px-6 py-1">
                                                             <div>
                                                                 <image
-                                                                    src={product.productImage}
-                                                                    alt={product.productName}
+                                                                    src={product.imageFileName}
+                                                                    alt={product.imageFileName}
                                                                     width={50}
                                                                     height={50}
                                                                 />
@@ -378,18 +409,11 @@ const Table = () => {
                                         value={newProduct.productImage}
                                     />
                                 </div> */}
-                                {/* <div className="formbold-mb-3">
-                                    <label htmlFor="upload" className="formbold-form-label">
-                                        Hình ảnh minh họa
-                                    </label>
-                                    <input
-                                        type="file"
-                                        name="productImage"
-                                        id="productImage"
-                                        className="formbold-form-input formbold-form-file"
-                                        onChange={handleChange}
-                                    />
-                                </div> */}
+                                
+                                <input type="file" id="file-upload" required  onChange={(e) => handleImageChange(e)}/>
+                                {productImage&&(
+                                    <img src={productImage.preview} alt='' width="30%"/>
+                                )}
                                 <button className="formbold-btn" onClick={handleSubmit}>
                                     Submit
                                 </button>
