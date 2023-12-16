@@ -1,8 +1,7 @@
 package com.luckygroup.webapi.utils;
 
 import org.apache.velocity.exception.ResourceNotFoundException;
-import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
-import org.jose4j.jwa.Algorithm;
+
 import org.jose4j.jwk.RsaJsonWebKey;
 import org.jose4j.jwk.RsaJwkGenerator;
 import org.jose4j.jws.AlgorithmIdentifiers;

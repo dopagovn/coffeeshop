@@ -88,7 +88,7 @@ public class AccountServiceImpl implements AccountsService {
 
   @Override
   public Accounts updateAccount(Accounts accounts) {
-    // TODO Auto-generated method stub
+
     throw new UnsupportedOperationException("Unimplemented method 'updateAccount'");
   }
 }

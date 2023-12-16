@@ -39,7 +39,7 @@ public class OrderDetailServiceImpl implements OrderDetailService {
     } catch (Exception e) {
       throw new ResourceNotFoundException("Not found order details", e);
     }
-  }
+
 
   @Override
   public OrderDetail findById(int id) {
