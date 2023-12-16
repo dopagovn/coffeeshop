@@ -1,19 +1,19 @@
 package com.luckygroup.webapi.controllers;
 
 import com.luckygroup.webapi.common.ResponseHandler;
-import com.luckygroup.webapi.models.Accounts;
+
 import com.luckygroup.webapi.models.OrderDetail;
 import com.luckygroup.webapi.services.OrderDetailService;
-import jakarta.transaction.Transactional;
+
 import java.util.List;
-import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @Controller
 @RequestMapping(path = "/api/v1")
@@ -25,7 +25,7 @@ public class OrderDetailController {
     public OrderDetailController(OrderDetailService orderDetailService) {
         this.orderDetailService = orderDetailService;
     }
-  }
+
 
     @GetMapping(path = "/order-detail/{id}")
     public ResponseEntity<Object> getOrderDetailById(@PathVariable int id) {
@@ -62,7 +62,7 @@ public class OrderDetailController {
             );
         }
     }
-  }
+
   // @PostMapping(path = "/order-detail")
   // public ResponseEntity<String> saveOrderDetail(@RequestBody OrderDetail orderDetail) {
   //     orderDetailService.saveOrderDetail(orderDetail);
