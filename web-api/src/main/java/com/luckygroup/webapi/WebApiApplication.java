@@ -6,24 +6,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
-
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class WebApiApplication {
 
   public static void main(String[] args) {
     SpringApplication.run(WebApiApplication.class, args);
-    JwtUtils jwtUtils = new JwtUtils();
-
-    System.out.println(jwtUtils.generatorToken("dopagovn@gmail.com"));
   }
 
   @Bean
@@ -53,7 +45,7 @@ public class WebApiApplication {
   }
 
   @Bean
-    public MultipartResolver multipartResolver() {
-        return new StandardServletMultipartResolver();
-    }
+  public MultipartResolver multipartResolver() {
+    return new StandardServletMultipartResolver();
+  }
 }
