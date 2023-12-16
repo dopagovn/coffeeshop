@@ -1,5 +1,6 @@
 package com.luckygroup.webapi.repository;
 
+import com.luckygroup.webapi.models.Category;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
