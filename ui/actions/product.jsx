@@ -16,3 +16,8 @@ export const deleteProduct = createAsyncThunk('product/delete', async (id) => {
     const response = await ApiService.delete(`/product/${id}`);
     return response;
 });
+
+export const getProductById = createAsyncThunk('product/get', async (id) => {
+    const response = await ApiService.get(`/product/${id}`);
+    return response;
+})
