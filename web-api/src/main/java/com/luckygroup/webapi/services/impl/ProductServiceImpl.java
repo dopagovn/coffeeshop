@@ -52,7 +52,11 @@ public class ProductServiceImpl implements ProductService {
     public Product saveProduct(Product product, MultipartFile productImage) throws IOException {
         // Lưu trữ tệp hình ảnh trong thư mục cụ thể
         String uploadDir = "C:\\Users\\hoang\\Desktop\\ptpm\\coffeeshop\\ui\\public\\assets\\img";
-        String fileName = productImage.getOriginalFilename();
+        String originalFilename  = productImage.getOriginalFilename();
+        // Loại bỏ khoảng trắng và dấu từ tên tệp
+        String sanitizedFilename = originalFilename.replaceAll("\\s+", "_"); // Thay thế khoảng trắng bằng dấu gạch dưới
+        sanitizedFilename = sanitizedFilename.replaceAll("[^a-zA-Z0-9._-]", ""); // Loại bỏ các ký tự không hợp lệ
+        String fileName = "coffe_"+ sanitizedFilename;
         Path filePath = Path.of(uploadDir, fileName);
 
         Files.copy(productImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
