@@ -1,18 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
-
-
-
-
-export default function Document({pathName}: any) {
-
-
-
-
-    
-
-
+export default function Document({ pathName }: any) {
     return (
         <Html>
             <Head>
@@ -28,6 +17,8 @@ export default function Document({pathName}: any) {
                 {/* CSS Files */}
                 <link id="pagestyle" href="/assets/css/soft-ui-dashboard.css?v=1.0.3" rel="stylesheet" />
                 <link id="pagestyle" href="/assets/css/custom.css" rel="stylesheet" />
+                <link id="pagestyle" href="/assets/css/create-button.css" rel="stylesheet" />
+                <link id="pagestyle" href="/assets/css/create-button-modal.css" rel="stylesheet" />
             </Head>
 
             <body className="g-sidenav-show bg-gray-100" style={{ overflow: 'visible' }}>

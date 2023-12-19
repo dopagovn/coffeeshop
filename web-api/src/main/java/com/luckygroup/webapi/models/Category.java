@@ -6,34 +6,33 @@ import jakarta.persistence.*;
 @Table(name = "category")
 public class Category {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String name;
+  private String name;
 
-    // Constructors
-    public Category() {
-    }
+  // Constructors
+  public Category() {}
 
-    public Category(String name) {
-        this.name = name;
-    }
+  public Category(String name) {
+    this.name = name;
+  }
 
-    // Getters and setters
-    public int getId() {
-        return id;
-    }
+  // Getters and setters
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 }
