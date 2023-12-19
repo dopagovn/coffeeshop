@@ -1,5 +1,5 @@
 import { CaseReducer, PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { getAllProducts } from '../actions/product';
+import { getProductById } from '../actions/product';
 
 type State = any;
 const increment: CaseReducer<State, PayloadAction<any>> = (state, action) => state + action.payload;
@@ -7,14 +7,20 @@ const increment: CaseReducer<State, PayloadAction<any>> = (state, action) => sta
 const productSlice = createSlice({
     name: 'product',
     initialState: {
-        products: [],
+        code: 0,
+        product: {},
+        message: '',
+        status: '',
     },
     reducers: {
         increment,
     },
     extraReducers: (builder: any) => {
-        builder.addCase(getAllProducts.fulfilled, (state: State, action: any) => {
-            state.products = action.payload;
+        builder.addCase(getProductById.fulfilled, (state: State, action: any) => {
+            state.product = action.payload.data;
+            state.code = action.payload.code;
+            state.message = action.payload.message;
+            state.status = action.payload.status;
         });
     },
 });

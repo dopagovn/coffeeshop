@@ -5,22 +5,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllProducts } from '../../actions/product.jsx';
 
-
 const Login = () => {
-
-
     // const {data} = useSelector(state => state.product);
-
-    const { data } = useSelector(state => state.product);
-
-    const dispatch = useDispatch();
-
-
-    useEffect(() => {
-        dispatch(getAllProducts());
-    }, [])
-
-
 
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
@@ -34,7 +20,6 @@ const Login = () => {
     };
 
     const handleSignIn = () => {
-
         console.log('User Name:', userName);
         console.log('Password:', password);
     };
@@ -51,9 +36,7 @@ const Login = () => {
                                         className="navbar-brand font-weight-bolder ms-lg-0 ms-3 "
                                         href="../pages/dashboard.html"
                                     >
-
                                         Soft UI Dashboard
-
                                     </a>
                                     <button
                                         className="navbar-toggler shadow-none ms-2"
@@ -73,7 +56,7 @@ const Login = () => {
                                     <div className="collapse navbar-collapse" id="navigation">
                                         <ul className="navbar-nav mx-auto ms-xl-auto me-xl-7">
                                             <li className="nav-item">
-                                                <Link className="nav-link me-2" href="register">
+                                                <Link className="nav-link me-2" href="/register">
                                                     <i className="fas fa-user-circle opacity-6 text-dark me-1" />
                                                     Sign Up
                                                 </Link>
@@ -114,7 +97,6 @@ const Login = () => {
                                                             className="form-control"
                                                             placeholder="userName"
                                                             aria-label="userName"
-
                                                             value={userName}
                                                             onChange={handleUserNameChange}
                                                         />
@@ -126,7 +108,6 @@ const Login = () => {
                                                             className="form-control"
                                                             placeholder="Password"
                                                             aria-label="Password"
-
                                                             value={password}
                                                             onChange={handlePasswordChange}
                                                         />
@@ -146,6 +127,7 @@ const Login = () => {
                                                         <button
                                                             type="button"
                                                             className="btn bg-gradient-info w-100 mt-4 mb-0"
+                                                            onSubmit={handleSignIn}
                                                         >
                                                             Sign in
                                                         </button>

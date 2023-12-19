@@ -3,9 +3,9 @@ package com.luckygroup.webapi.controllers;
 import com.luckygroup.webapi.common.ResponseHandler;
 import com.luckygroup.webapi.models.Accounts;
 import com.luckygroup.webapi.services.AccountsService;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@Transactional
 @RequestMapping(path = "/api/v1")
 public class AccountsController {
 
@@ -34,7 +35,7 @@ public class AccountsController {
       );
     } catch (Exception e) {
       return ResponseHandler.generateResponse(
-        HttpStatus.INTERNAL_SERVER_ERROR,
+        HttpStatus.NOT_FOUND,
         "Failed",
         null
       );

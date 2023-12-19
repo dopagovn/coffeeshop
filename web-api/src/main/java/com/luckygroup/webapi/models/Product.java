@@ -7,8 +7,12 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-  
+
+    
     private int id;
+   
+
+    
 
 
     private int categoryId;
@@ -21,13 +25,14 @@ public class Product {
 
     private double productPrice;
 
-
+     @Column(name = "product_image")
     private String productImage;
 
     private int stockQuantity;
 
     // Constructors
     public Product() {
+        super();
     }
 
     public Product(int categoryId, String productName, String productDescription, double productPrice, String productImage, int stockQuantity) {
@@ -38,9 +43,6 @@ public class Product {
         this.productImage = productImage;
         this.stockQuantity = stockQuantity;
     }
-
-    // Getters and setters
-
     
     public int getId() {
         return id;
@@ -98,3 +100,4 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 }
+

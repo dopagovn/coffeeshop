@@ -1,24 +1,12 @@
 package com.luckygroup.webapi.services;
 
 import com.luckygroup.webapi.models.OrderDetail;
-import com.luckygroup.webapi.repository.OrderDetailRepository;
-
-import jakarta.transaction.Transactional;
-
-
-
 import java.util.List;
 
-
-
 public interface OrderDetailService {
-
-    OrderDetail findById(Integer id);
-    List<OrderDetail> findAll();
-
-    OrderDetail deleteOrderDetail(int id);
-
-
-    OrderDetail getOrderDetailsByOrderId(int orderId);
-
+  List<OrderDetail> getAllOrderDetails();
+  List<OrderDetail> findOrderDetailsByOrderId(int orderId);
+  OrderDetail findById(int id);
+  OrderDetail saveOrderDetail(OrderDetail orderDetail);
+  void deleteOrderDetail(Integer id);
 }
