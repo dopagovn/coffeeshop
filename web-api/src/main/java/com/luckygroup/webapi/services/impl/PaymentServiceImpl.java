@@ -1,9 +1,10 @@
-package com.luckygroup.webapi.services;
+package com.luckygroup.webapi.services.impl;
 
 import com.luckygroup.webapi.models.Order;
 import com.luckygroup.webapi.models.Payment;
 import com.luckygroup.webapi.repository.OrderRepository;
 import com.luckygroup.webapi.repository.PaymentRepository;
+import com.luckygroup.webapi.services.PaymentService;
 
 import jakarta.transaction.Transactional;
 
@@ -15,38 +16,44 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public interface PaymentService {
+public class PaymentServiceImpl implements PaymentService {
 
     private final PaymentRepository paymentRepository;
     private final OrderRepository orderRepository;
 
     @Autowired
-    public PaymentService(PaymentRepository paymentRepository, OrderRepository orderRepository) {
+    public PaymentServiceImpl(PaymentRepository paymentRepository, OrderRepository orderRepository) {
         this.paymentRepository = paymentRepository;
         this.orderRepository = orderRepository;
     }
 
+    @Override
     public Optional<Payment> findById(Integer id) {
         return paymentRepository.findById(id);
     }
 
+    @Override
     public Optional<List<Payment>> getAllPayments() {
         List<Payment> payments = paymentRepository.findAll();
         return Optional.ofNullable(payments);
     }
 
+    @Override
     public void savePayment(Payment payment) {
         paymentRepository.save(payment);
     }
 
+    @Override
     public void deletePayment(Integer id) {
         paymentRepository.deleteById(id);
     }
 
+    @Override
     public Optional<Payment> getPaymentByOrderId(Integer orderId) {
         return paymentRepository.findByOrderId(orderId);
     }
 
+    @Override
     public void makePayment(Integer orderId) {
         Optional<Order> optionalOrder = orderRepository.findByOrderId(orderId);
         if (optionalOrder.isPresent()) {
