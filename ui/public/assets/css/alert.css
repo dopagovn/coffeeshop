@@ -1,0 +1,8 @@
+.alert_comp{
+  display:  flex;
+  position: fixed;
+  bottom: 15px;
+  right: 100px;
+  z-index: 1;
+  color: rgb(255, 255, 255);
+}

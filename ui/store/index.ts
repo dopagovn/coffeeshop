@@ -2,10 +2,12 @@ import { Tuple, combineReducers, configureStore } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 import storage from 'redux-persist/lib/storage';
-import productListReducer from '../slices/productListSlice';
-import productCreateEdit from '../slices/productSlice';
+import productListReducer from '../slices/productSlice/productListSlice';
+import productCreateEdit from '../slices/productSlice/productSlice';
+import categoryListReducer from '../slices/categorySlice/categoryListSlice';
+import categoryCreateEdit from '../slices/categorySlice/categorySlice';
 import accountReducer from '../slices/accountSlice';
-import categoryReducer from '../slices/categorySlice';
+
 
 export type RootState = ReturnType<typeof reducer>;
 
@@ -18,11 +20,15 @@ const productsReducer = combineReducers({
     productCreateEdit: productCreateEdit,
     productList: productListReducer,
 });
+const categoriesReducer = combineReducers({
+    categoryCreateEdit: categoryCreateEdit,
+    categoryList: categoryListReducer,
+});
 
 const reducer = combineReducers({
+    category: categoriesReducer,
     product: productsReducer,
     account: accountReducer,
-    category: categoryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
