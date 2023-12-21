@@ -1,59 +1,60 @@
 package com.luckygroup.webapi.models;
 
-import jakarta.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "orders")
+@Table(name = "`order`")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private int orderId;
+    private Long id;
 
-    @Column(name = "customer_information")
-    private String customerInformation;
+    @Column(name = "account_id")
+    private Long accountId;
 
     @Column(name = "order_date")
     private Date orderDate;
 
-    @Column(name = "total_order_amount")
-    private double totalOrderAmount;
+    @Column(name = "order_amount")
+    private Long orderAmount;
 
-    @Column(name = "order_status")
-    private String orderStatus;
-    
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-    private Payment payment;
+    @Column(name = "status")
+    private Long status;
 
-    // Constructors
-    public Order() {
-
+    public Order(){
+        super();
     }
 
-    public Order(String customerInformation, Date orderDate, double totalOrderAmount, String orderStatus) {
-        this.customerInformation = customerInformation;
-        this.orderDate = orderDate;
-        this.totalOrderAmount = totalOrderAmount;
-        this.orderStatus = orderStatus;
+    public Order(Long id, Long accountid, Date orderDate, Long orderAmount, Long status){
+        this.id = id;
+        this.accountId = accountid;
+        this. orderDate = orderDate;
+        this.orderAmount = orderAmount;
+        this.status = status;
     }
 
-    // Getters and Setters
-
-    public int getOrderId() {
-        return orderId;
+    public Long getId() {
+        return id;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getCustomerInformation() {
-        return customerInformation;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setCustomerInformation(String customerInformation) {
-        this.customerInformation = customerInformation;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public Date getOrderDate() {
@@ -64,23 +65,20 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public double getTotalOrderAmount() {
-        return totalOrderAmount;
+    public Long getOrderAmount() {
+        return orderAmount;
     }
 
-    public void setTotalOrderAmount(double totalOrderAmount) {
-        this.totalOrderAmount = totalOrderAmount;
+    public void setOrderAmount(Long orderAmount) {
+        this.orderAmount = orderAmount;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
+    public Long getStatus() {
+        return status;
     }
 
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setStatus(Long status) {
+        this.status = status;
     }
 
-    public double getTotalAmount() {
-        return getTotalOrderAmount();
-    }
 }

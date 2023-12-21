@@ -40,7 +40,6 @@ public class AccountServiceImpl implements AccountsService {
       throw new ResourceNotFoundException("Not found account", e);
     }
   }
-
   @Override
   public List<Accounts> getAllAccount() throws ResourceAccessException {
     try {

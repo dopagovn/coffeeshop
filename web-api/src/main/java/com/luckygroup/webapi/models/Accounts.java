@@ -13,11 +13,7 @@ public class Accounts {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-<<<<<<< HEAD
-  private Integer id;
-=======
   private Long id;
->>>>>>> thinh
 
   private String email, password, address, phone, firstName, lastName;
   private Date birthDate;
