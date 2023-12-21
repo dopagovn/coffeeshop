@@ -23,7 +23,7 @@ public class Product {
     private String productDescription;
 
 
-    private double productPrice;
+    private int productPrice;
 
      @Column(name = "product_image")
     private String productImage;
@@ -35,7 +35,7 @@ public class Product {
         super();
     }
 
-    public Product(int categoryId, String productName, String productDescription, double productPrice, String productImage, int stockQuantity) {
+    public Product(int categoryId, String productName, String productDescription, int productPrice, String productImage, int stockQuantity) {
         this.categoryId = categoryId;
         this.productName = productName;
         this.productDescription = productDescription;
@@ -76,11 +76,11 @@ public class Product {
         this.productDescription = productDescription;
     }
 
-    public double getProductPrice() {
+    public int getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(double productPrice) {
+    public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
 

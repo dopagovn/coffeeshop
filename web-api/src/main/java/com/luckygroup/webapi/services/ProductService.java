@@ -13,7 +13,7 @@ public interface ProductService {
     // Product saveProduct(Product product);
     void deleteProduct(Long id);
     Product deserializeProductFromJson(String productJson);
-    Product saveProduct(Product product, MultipartFile productImage) throws IOException;
+    Product saveProduct(Product product, MultipartFile multipartFile) throws IOException;
 
     // Bổ sung các phương thức tùy chỉnh nếu cần
 }
