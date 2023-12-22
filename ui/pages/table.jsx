@@ -10,16 +10,16 @@ import CategoryModal from '../components/modal/category.tsx';
 import ApiService from '../utils/api.ts';
 import Alert from '../components/alert/index.jsx';
 
-// import Image from 'next/image';
 
 const Table = () => {
     const { products } = useSelector((state) => state.product.productList);
     const { product } = useSelector((state) => state.product.productCreateEdit);
 
-    const { categories } = useSelector((state) => state.category.categoryList) ;
-    const {categoryItem} = useSelector((state) => state.category.categoryCreateEdit) ;
+    const { categories } = useSelector((state) => state.category.categoryList);
+    const { categoryItem } = useSelector((state) => state.category.categoryCreateEdit);
 
     const [searchTerm, setSearchTerm] = useState('');
+    const [searchCategory, setSearchCategory] = useState('');
     const [isEdit, setIsEdit] = useState(false);
     const [productData, setProductData] = useState(viewEditProductForm);
     const [categoryData, setCategoryData] = useState(viewEditCategoryForm);
@@ -81,17 +81,13 @@ const Table = () => {
 
     const handleChangeCategory = (e) => {
         const { name, value } = e.target;
-        if (name === 'categoryId') {
+       
             setCategoryData({
                 ...categoryData,
                 [name]: value,
             });
-        } else {
-            setCategoryData({
-                ...categoryData,
-                [name]: value,
-            });
-        }
+       
+        
     };
 
     const onCreateProduct = async () => {
@@ -172,19 +168,25 @@ const Table = () => {
     //     setCategoryData(category);
     // }, [product, category]);
 
+    //Tìm kiếm theo product
     const filteredProducts =
         products && products.filter((product) => product.productName.toLowerCase().includes(searchTerm.toLowerCase()));
 
-        const getCategoryNameById = (categoryId) => {
-            const category = categories.find((data) => data.id === categoryId);
-        
-            if (!category) {
-                console.error(`Không tìm thấy loại sản phẩm với ID ${categoryId}`);
-                return 'Loại sản phẩm không xác định';
-            }
-        
-            return category.name;
-        };
+    //tìm kiếm theo category
+    const filteredCategories =
+        categories &&
+        categories.filter((category) => category.name.toLowerCase().includes(searchCategory.toLowerCase()));
+
+    const getCategoryNameById = (categoryId) => {
+        const category = categories.find((data) => data.id === categoryId);
+
+        if (!category) {
+            console.error(`Không tìm thấy loại sản phẩm với ID ${categoryId}`);
+            return 'Loại sản phẩm không xác định';
+        }
+
+        return category.name;
+    };
     const handleClose = () => {
         setIsEdit(false);
         setProductData(viewEditProductForm);
@@ -381,8 +383,8 @@ const Table = () => {
                                                 type="text"
                                                 name="text"
                                                 className="input"
-                                                value={searchTerm}
-                                                onChange={(e) => setSearchTerm(e.target.value)}
+                                                value={searchCategory}
+                                                onChange={(e) => setSearchCategory(e.target.value)}
                                             />
                                             <label className="label">Search</label>
                                             <div className="top-line" />
@@ -395,7 +397,7 @@ const Table = () => {
                                             data-bs-toggle="modal"
                                             tabIndex={0}
                                             onClick={handleButtonCreateCategory}
-                                            data-bs-target="#exampleModal"
+                                            data-bs-target="#categoryModal"
                                             className="plusButton col-2 mx-4"
                                         >
                                             <svg
@@ -425,8 +427,8 @@ const Table = () => {
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    {categories &&
-                                                        categories.map((category, index) => (
+                                                    {filteredCategories &&
+                                                        filteredCategories.map((category, index) => (
                                                             <tr key={index}>
                                                                 <td>
                                                                     <p className="text-center font-weight-bold mb-0">

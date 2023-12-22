@@ -22,7 +22,7 @@ const Sidebar = (props: Props) => {
                         aria-hidden
                         id="iconSidenav"
                     />
-                    <a className="navbar-brand m-0" href="#" target="_blank">
+                    <a className="navbar-brand m-0" href="/home" target="_blank">
                         <img src="/assets/img/logo-ct.png" className="navbar-brand-img h-100" alt="main_logo" />
                         <span className="ms-1 font-weight-bold">Soft UI Dashboard</span>
                     </a>

@@ -20,6 +20,7 @@ export default function Document({ pathName }: any) {
                 <link id="pagestyle" href="/assets/css/create-button.css" rel="stylesheet" />
                 <link id="pagestyle" href="/assets/css/create-button-modal.css" rel="stylesheet" />
                 <link id="pagestyle" href="/assets/css/alert.css" rel="stylesheet" />
+                {/* <link id="pagestyle" href="/assets/css/home.css" rel="stylesheet" /> */}
             </Head>
 
             <body className="g-sidenav-show bg-gray-100" style={{ overflow: 'visible' }}>

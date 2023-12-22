@@ -7,7 +7,8 @@ import { Provider } from 'react-redux';
 import store from '../store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import Order from './order';
+import Home from './home/Home';
+import Order from './home/Home';
 
 export default function App({ Component, pageProps }: AppProps) {
     const persistor = persistStore(store);
@@ -25,6 +26,8 @@ export default function App({ Component, pageProps }: AppProps) {
             return <Register />;
         case Order:
             return <Order />;
+        case Home:
+            return <Home />;
         default:
     }
 
