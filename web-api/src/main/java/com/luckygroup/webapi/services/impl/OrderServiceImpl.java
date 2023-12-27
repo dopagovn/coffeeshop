@@ -5,19 +5,19 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import com.luckygroup.webapi.models.Order;
+import com.luckygroup.webapi.models.OrderRequest;
 import com.luckygroup.webapi.repository.OrderRepository;
 import com.luckygroup.webapi.services.OrderService;
 
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final ModelMapper modelMapper;
-
+    
     public OrderServiceImpl(OrderRepository orderRepository, ModelMapper modelMapper) {
         this.orderRepository = orderRepository;
         this.modelMapper = modelMapper;
@@ -27,7 +27,7 @@ public class OrderServiceImpl implements OrderService {
     public Order findOrderById(Long id) {
         return orderRepository.findById(id)
                 .map(order -> modelMapper.map(order, Order.class))
-                .orElseThrow(() -> new ResourceNotFoundException("Not Found Order"));
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy đơn đặt hàng"));
     }
 
     @Override
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
             order = orderRepository.save(order);
             return order;
         } catch (Exception e) {
-            throw new ResourceNotFoundException("Không thể khởi tạo order", e);
+            throw new ResourceNotFoundException("Không thể tạo đơn hàng", e);
         }
     }
 
@@ -53,15 +53,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateOrder(Order order) {
-        Long orderId = order.getId();
+    public void updateOrder(OrderRequest orderRequest, Long id) {
+        Long orderId = id;
         if (orderId == null || !orderRepository.existsById(orderId)) {
             throw new ResourceNotFoundException("Order with ID " + orderId + " does not exist. Unable to update.");
         }
-
+        Order order = orderRepository.findById(id).get();
+        order.setStatus(orderRequest.getStatus());
+        order.setOrderAmount(orderRequest.getOrderAmount());
         orderRepository.save(order);
     }
-
     @Override
     public void deleteOrder(Long id) {
         if (!orderRepository.existsById(id)) {
@@ -86,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
 
     private void validateOrderInput(Long accountId, Long orderAmount) {
         if (accountId == null || orderAmount == null || orderAmount <= 0) {
-            throw new IllegalArgumentException("Invalid input data for placing an order");
+            throw new IllegalArgumentException("Dữ liệu đầu vào không hợp lệ để đặt hàng");
         }
     }
 
@@ -100,8 +101,8 @@ public class OrderServiceImpl implements OrderService {
     private void createNewOrder(Long accountId, Long orderAmount) {
         Order newOrder = new Order();
         newOrder.setAccountId(accountId);
-        newOrder.setOrderDate(new Date(System.currentTimeMillis()));
         newOrder.setOrderAmount(orderAmount);
+        newOrder.setOrderDate(new Date(System.currentTimeMillis()));
         newOrder.setStatus(1L);
         orderRepository.save(newOrder);
     }

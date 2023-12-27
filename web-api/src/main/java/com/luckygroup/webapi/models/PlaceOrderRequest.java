@@ -3,9 +3,7 @@ package com.luckygroup.webapi.models;
 public class PlaceOrderRequest {
     private Long accountId;
     private Long orderAmount;
-
     public PlaceOrderRequest() {
-        // Default constructor
     }
 
     public PlaceOrderRequest(Long accountId, Long orderAmount) {

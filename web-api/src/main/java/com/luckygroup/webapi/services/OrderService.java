@@ -1,5 +1,8 @@
 package com.luckygroup.webapi.services;
 import com.luckygroup.webapi.models.Order;
+import com.luckygroup.webapi.models.OrderRequest;
+import com.luckygroup.webapi.repository.OrderRepository;
+
 import java.util.List;
 public interface OrderService {
     Order findOrderById(Long id);
@@ -8,10 +11,9 @@ public interface OrderService {
 
     void saveOrder(Order order);
 
-    void updateOrder(Order order);
+    void updateOrder(OrderRequest orderRequest, Long id);
 
     void deleteOrder(Long id);
 
-    // Thêm phương thức để đặt hàng
     void placeOrder(Long accountId, Long orderAmount) throws IllegalArgumentException;
 }

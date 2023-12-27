@@ -1,16 +1,15 @@
 package com.luckygroup.webapi.models;
 
-import java.sql.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.sql.Date;
 
 @Entity
-@Table(name = "`order`")
+@Table(name = "orders")
 public class Order {
 
     @Id
@@ -29,18 +28,20 @@ public class Order {
     @Column(name = "status")
     private Long status;
 
-    public Order(){
-        super();
+    // Constructors
+    public Order() {
+        // Default constructor
     }
 
-    public Order(Long id, Long accountid, Date orderDate, Long orderAmount, Long status){
+    public Order(Long id, Long accountId, Date orderDate, Long orderAmount, Long status) {
         this.id = id;
-        this.accountId = accountid;
-        this. orderDate = orderDate;
+        this.accountId = accountId;
+        this.orderDate = orderDate;
         this.orderAmount = orderAmount;
         this.status = status;
     }
 
+    // Getter and Setter methods
     public Long getId() {
         return id;
     }
@@ -80,5 +81,4 @@ public class Order {
     public void setStatus(Long status) {
         this.status = status;
     }
-
 }
