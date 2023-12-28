@@ -9,12 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.luckygroup.webapi.models.Product;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Optional<Product> findById(int id);
     List<Product> findByCategoryId(int categoryId);
     Optional<Product> deleteById(int id);
-
-    // Thêm phương thức tìm kiếm Product theo tên hình ảnh
-    Optional<Product> findByProductImage(String productImage);
 }

@@ -42,6 +42,7 @@ public class AccountsController {
     }
   }
 
+
   @GetMapping(path = "/accounts")
   public ResponseEntity<Object> getAllAccount() {
     try {

@@ -1,5 +1,3 @@
-// package com.luckygroup.webapi.controllers;
-
 // import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.web.bind.annotation.*;
 

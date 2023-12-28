@@ -1,5 +1,7 @@
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Service;
+package com.luckygroup.webapi.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 // import com.luckygroup.webapi.models.TransactionHistory;
 // import com.luckygroup.webapi.repository.TransactionHistoryRepository;
