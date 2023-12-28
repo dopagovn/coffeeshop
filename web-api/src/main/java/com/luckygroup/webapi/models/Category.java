@@ -1,6 +1,9 @@
 package com.luckygroup.webapi.models;
 
+import java.util.List;
+
 import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;;
 
 @Entity
 @Table(name = "category")
@@ -35,4 +38,7 @@ public class Category {
   public void setName(String name) {
     this.name = name;
   }
+
+  @OneToMany(mappedBy = "category", cascade = CascadeType.REMOVE)
+  private List<Product> products;
 }

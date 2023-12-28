@@ -1,33 +1,35 @@
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+// package com.luckygroup.webapi.controllers;
 
-import com.luckygroup.webapi.models.TransactionHistory;
-import com.luckygroup.webapi.services.TransactionHistoryService;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+// import com.luckygroup.webapi.models.TransactionHistory;
+// import com.luckygroup.webapi.services.TransactionHistoryService;
 
-@RestController
-@RequestMapping("/transactions")
-public class TransactionHistoryController {
+// import java.util.List;
 
-    @Autowired
-    private TransactionHistoryService transactionHistoryService;
+// @RestController
+// @RequestMapping("/transactions")
+// public class TransactionHistoryController {
 
-    // Endpoint lấy tất cả lịch sử giao dịch
-    @GetMapping
-    public List<TransactionHistory> getAllTransactions() {
-        return transactionHistoryService.getAllTransactions();
-    }
+//     @Autowired
+//     private TransactionHistoryService transactionHistoryService;
 
-    // Endpoint lấy lịch sử giao dịch theo ID
-    @GetMapping("/{id}")
-    public TransactionHistory getTransactionById(@PathVariable Long id) {
-        return transactionHistoryService.getTransactionById(id);
-    }
+//     // Endpoint lấy tất cả lịch sử giao dịch
+//     @GetMapping
+//     public List<TransactionHistory> getAllTransactions() {
+//         return transactionHistoryService.getAllTransactions();
+//     }
 
-    // Endpoint thêm mới một giao dịch
-    @PostMapping
-    public TransactionHistory addTransaction(@RequestBody TransactionHistory transactionHistory) {
-        return transactionHistoryService.addTransaction(transactionHistory);
-    }
-}
+//     // Endpoint lấy lịch sử giao dịch theo ID
+//     @GetMapping("/{id}")
+//     public TransactionHistory getTransactionById(@PathVariable Long id) {
+//         return transactionHistoryService.getTransactionById(id);
+//     }
+
+//     // Endpoint thêm mới một giao dịch
+//     @PostMapping
+//     public TransactionHistory addTransaction(@RequestBody TransactionHistory transactionHistory) {
+//         return transactionHistoryService.addTransaction(transactionHistory);
+//     }
+// }
