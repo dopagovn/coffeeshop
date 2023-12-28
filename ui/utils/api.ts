@@ -1,5 +1,7 @@
+
 import { API_URL } from '../constants/app-constant';
 import notification, { NotifyTypes } from './modal/notification';
+
 
 class ApiService {
     root: string;
@@ -68,27 +70,33 @@ class ApiService {
         }
         return undefined;
     };
+    // ApiService.post
     post = async (url: string, data: any) => {
         try {
             const uri = this.getFullApiLink(url);
-            const headers = this.getRequestHeader();
+    
             const response = await fetch(uri, {
                 credentials: 'include',
                 method: 'POST',
-                headers,
-                body: JSON.stringify(data),
+                body: data,
+                headers: {
+                    'Accept': 'application/json',
+                    // Đối với FormData, không cần 'Content-Type': 'application/json'
+                },
             });
-
+    
             if (!!response && response.status === 200) {
                 return await response.json();
             }
-
+    
             await this.handleErrorException(response);
         } catch (error) {
             await this.handleErrorException(error);
         }
         return undefined;
     };
+     
+    
     put = async (url: string, data: any) => {
         try {
             const uri = this.getFullApiLink(url);
@@ -132,31 +140,45 @@ class ApiService {
         return undefined;
     };
 
-    uploadImage = async (url: string, data: any) => {
-        try {
-            const uri = this.getFullApiLink(url);
-            const headers = {
-                'Content-Type': 'multipart/form-data',
-                Accept: 'application/json',
-            };
+   
 
-            const response = await fetch(uri, {
-                credentials: 'include',
-                method: 'POST',
-                headers,
-                body: data,
-            });
+    // uploadImageWithJson = async (url: string, file: File, jsonData: any): Promise<any> => {
+    //     try {
+    //       const uri = this.getFullApiLink(url);
+    //       let formData = new FormData();
+    //       formData.append('file', file);
+    //       formData.append('productJson', JSON.stringify(jsonData));
+    //       const response = await fetch(uri, {
+    //         method: 'POST',
+    //         body: formData,
+    //         headers: {
+    //           'Accept': 'application/json',
+    //           'Content-Type': 'multipart/form-data',
+    //         },
+    //       });
+    //       if (response.status !== 200) {
+    //         throw new Error(response.statusText);
+    //       }
+    //       return await response.json();
+    //     } catch (error) {
+    //       console.error('Error during request:', error);
+    //       throw error;
+    //     }
+    //   };
+      
 
-            if (!!response && response.status === 200) {
-                return await response.json();
-            }
 
-            await this.handleErrorException(response);
-        } catch (error) {
-            await this.handleErrorException(error);
-        }
-        return undefined;
-    };
+    
+     
+    
+    
+    
+    
+    
+    
+   
+    
+    
 }
 
 export default new ApiService();

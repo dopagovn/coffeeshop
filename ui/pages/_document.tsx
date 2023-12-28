@@ -19,6 +19,8 @@ export default function Document({ pathName }: any) {
                 <link id="pagestyle" href="/assets/css/custom.css" rel="stylesheet" />
                 <link id="pagestyle" href="/assets/css/create-button.css" rel="stylesheet" />
                 <link id="pagestyle" href="/assets/css/create-button-modal.css" rel="stylesheet" />
+                <link id="pagestyle" href="/assets/css/alert.css" rel="stylesheet" />
+
             </Head>
 
             <body className="g-sidenav-show bg-gray-100" style={{ overflow: 'visible' }}>
@@ -34,7 +36,7 @@ export default function Document({ pathName }: any) {
                 <Script strategy="beforeInteractive" src="/assets/js/plugins/chartjs.min.js" />
                 <Script strategy="lazyOnload" async src="https://buttons.github.io/buttons.js" />
                 <Script strategy="beforeInteractive" async src="https://kit.fontawesome.com/42d5adcbca.js"></Script>
-                {/* <Script strategy="lazyOnload" async src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3" /> */}
+                <Script strategy="lazyOnload" async src="/assets/js/soft-ui-dashboard.min.js?v=1.0.3" />
 
                 <Script strategy="lazyOnload">
                     {`var win = navigator.platform.indexOf('Win') > -1;

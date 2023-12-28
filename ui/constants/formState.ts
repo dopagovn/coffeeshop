@@ -1,8 +1,10 @@
 export const viewEditProductForm = {
-    categoryId: 0,
+    categoryId: 1,
     productName: '',
     productDescription: '',
     productPrice: 0,
-    productImage: '',
     stockQuantity: 0,
+};
+export const viewEditCategoryForm = {
+    name: '',
 };

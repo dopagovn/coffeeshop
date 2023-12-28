@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 
 type Props = {
     isEdit: any;
@@ -8,12 +8,17 @@ type Props = {
     setProductData: any;
     productData: any;
     onCreateProduct: any;
-    handleChange: any;
+    handleChangeProduct: any;
     categories: any;
+    handleClose: any;
+    onImageChange: any;
+
 };
 
-const Modal = (props: Props) => {
+const ProductModal = (props: Props) => {
     return (
+
+        
         <div
             className="modal fade"
             id="exampleModal"
@@ -50,16 +55,22 @@ const Modal = (props: Props) => {
                                         className="form-control"
                                         placeholder="Product name"
                                         value={props.productData.productName}
-                                        onChange={props.handleChange}
+                                        onChange={props.handleChangeProduct}
                                     />
                                 </div>
                             </div>
                             <div className="col">
                                 <div className="form-group">
                                     <label htmlFor="">Select category</label>
-                                    <select name="" id="" className="form-control">
-                                        {props.categories.map((category: any) => (
-                                            <option value={category.id} key={category.id} defaultValue={category.id}>
+                                    <select
+                                        name="categoryId"
+                                        id=""
+                                        className="form-control"
+                                        value={props.productData.categoryId}
+                                        onChange={props.handleChangeProduct}
+                                    >
+                                        {props.categories && props.categories.map((category: any) => (
+                                            <option key={category.id} value={category.id}>
                                                 {category.name}
                                             </option>
                                         ))}
@@ -79,7 +90,7 @@ const Modal = (props: Props) => {
                                         name="productDescription"
                                         placeholder="Product description"
                                         value={props.productData.productDescription}
-                                        onChange={props.handleChange}
+                                        onChange={props.handleChangeProduct}
                                     />
                                 </div>
                             </div>
@@ -94,7 +105,7 @@ const Modal = (props: Props) => {
                                             name="productPrice"
                                             type="text"
                                             className="form-control"
-                                            onChange={props.handleChange}
+                                            onChange={props.handleChangeProduct}
                                         />
                                         <span className="input-group-text">VNĐ</span>
                                     </div>
@@ -107,7 +118,7 @@ const Modal = (props: Props) => {
                                     <label htmlFor="" className="form-contol-label">
                                         Product image
                                     </label>
-                                    <input type="file" className="form-control" />
+                                    <input type="file" name='productImage' onChange={props.onImageChange} className="form-control" />
                                 </div>
                             </div>
                             <div className="col">
@@ -119,14 +130,19 @@ const Modal = (props: Props) => {
                                         className="form-control"
                                         placeholder="Stock quantity"
                                         value={props.productData.stockQuantity}
-                                        onChange={props.handleChange}
+                                        onChange={props.handleChangeProduct}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn bg-gradient-secondary" data-bs-dismiss="modal">
+                        <button
+                            type="button"
+                            onClick={props.handleClose}
+                            className="btn bg-gradient-secondary"
+                            data-bs-dismiss="modal"
+                        >
                             Close
                         </button>
                         <button type="button" className="btn bg-gradient-primary" onClick={props.onCreateProduct}>
@@ -139,4 +155,4 @@ const Modal = (props: Props) => {
     );
 };
 
-export default Modal;
+export default ProductModal;

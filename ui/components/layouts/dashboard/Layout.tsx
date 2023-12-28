@@ -3,7 +3,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Sidebar from './Sidebar';
-import { ScriptWithCleanup } from '../../utils/ScriptWithCleanup';
+import { ScriptWithCleanup } from '../../../utils/ScriptWithCleanup';
 
 const Layout = ({ children }: any) => {
     return (
