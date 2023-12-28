@@ -17,7 +17,7 @@ class ApiService {
 
     getRequestHeader = () => {
         return {
-            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         };
     };
 
@@ -74,15 +74,12 @@ class ApiService {
     post = async (url: string, data: any) => {
         try {
             const uri = this.getFullApiLink(url);
-    
+            const headers = this.getRequestHeader();
             const response = await fetch(uri, {
                 credentials: 'include',
                 method: 'POST',
                 body: data,
-                headers: {
-                    'Accept': 'application/json',
-                    // Đối với FormData, không cần 'Content-Type': 'application/json'
-                },
+                headers
             });
     
             if (!!response && response.status === 200) {
@@ -105,7 +102,7 @@ class ApiService {
                 credentials: 'include',
                 method: 'PUT',
                 headers,
-                body: JSON.stringify(data),
+                body: data,
             });
 
             if (!!response && response.status === 200) {

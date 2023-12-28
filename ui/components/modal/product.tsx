@@ -12,10 +12,13 @@ type Props = {
     categories: any;
     handleClose: any;
     onImageChange: any;
+    onEditProduct: any;
 
 };
 
 const ProductModal = (props: Props) => {
+
+    
     return (
 
         
@@ -145,9 +148,16 @@ const ProductModal = (props: Props) => {
                         >
                             Close
                         </button>
-                        <button type="button" className="btn bg-gradient-primary" onClick={props.onCreateProduct}>
-                            Save changes
-                        </button>
+                        <button
+    type="button"
+    className="btn bg-gradient-primary"
+    
+    onClick={props.isEdit ? () => props.onEditProduct(props.productData.id) : () => props.onCreateProduct()}
+    
+>
+    {props.isEdit ? 'Update' : 'Save changes'}
+</button>
+
                     </div>
                 </div>
             </div>

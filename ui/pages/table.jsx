@@ -41,13 +41,13 @@ const Table = () => {
         setProductData(product);
         setIsEdit(true);
     };
+    
     //edit category
     const handleButtonEditCategory = async (id) => {
         await dispatch(getCategoryById(id));
         setCategoryData(categoryItem);
         setIsEdit(true);
-    };
-    console.log(product);
+    };  
 
     const onImageChange = (e) => {
         if (e.target.files.length > 0) {
@@ -78,6 +78,8 @@ const Table = () => {
             });
         }
     };
+
+
 
     const handleChangeCategory = (e) => {
         const { name, value } = e.target;
@@ -124,6 +126,36 @@ const Table = () => {
             console.error('Lỗi khi tải lên hình ảnh và dữ liệu:', error);
         }
     };
+
+//chỉnh sửa product
+const onEditProduct = async (id) => {
+    try {
+
+        // delete productData.productImage;
+        // delete productData.id;
+        console.log(image)
+        
+        const formData = new FormData();
+        formData.append('productJson', JSON.stringify(productData));
+        formData.append('file', image);
+        
+        console.log(formData)
+        
+        const response = await ApiService.put(`/product/${id}`, formData);
+        console.log('Sending request with edited data:', JSON.stringify(productData));
+
+        if (response) {
+            console.log('Hình ảnh và dữ liệu đã được cập nhật thành công.');
+            dispatch(getAllProducts());
+        } else {
+            console.error('Response is undefined or null.');
+        }
+    } catch (error) {
+        console.error('Lỗi khi cập nhật hình ảnh và dữ liệu:', error);
+    }
+};
+
+
 
     //delete Product
     const handleDeleteProduct = async (id) => {
@@ -206,6 +238,7 @@ const Table = () => {
                     handleClose={handleClose}
                     onImageChange={onImageChange}
                     onCreateProduct={onCreateProduct}
+                    onEditProduct={onEditProduct}
                 />
                 <CategoryModal
                     isEdit={isEdit}
