@@ -2,6 +2,8 @@ package com.luckygroup.webapi.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.persistence.CascadeType;;
 

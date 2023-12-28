@@ -1,8 +1,11 @@
 package com.luckygroup.webapi.models;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "product")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "category"})
 public class Product {
 
     @Id
@@ -83,7 +86,8 @@ public class Product {
     }
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+@JoinColumn(name = "category_id")
+private Category category;
+
 }
 
