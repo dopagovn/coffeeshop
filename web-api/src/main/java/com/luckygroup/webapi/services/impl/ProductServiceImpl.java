@@ -61,7 +61,6 @@ public class ProductServiceImpl implements ProductService {
         sanitizedFilename = sanitizedFilename.replaceAll("[^a-zA-Z0-9._-]", ""); // Loại bỏ các ký tự không hợp lệ
         String fileName = "coffe_"+ sanitizedFilename;
         Path filePath = Path.of(uploadDir, fileName);
-
         Files.copy(productImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);//thay the bang anh moi
 
         // Đặt tên hình ảnh cho đối tượng Product
