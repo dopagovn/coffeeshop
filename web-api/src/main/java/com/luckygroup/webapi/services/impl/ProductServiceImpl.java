@@ -16,12 +16,15 @@ import java.util.Optional;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
+    
+    private final String uploadDir = "C:\\Users\\hoang\\Desktop\\ptpm\\coffeeshop\\ui\\public\\assets\\img";
 
     @Autowired
     public ProductServiceImpl(ProductRepository productRepository) {
@@ -50,16 +53,16 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product saveProduct(Product product, MultipartFile productImage) throws IOException {
-        // Lưu trữ tệp hình ảnh trong thư mục cụ thể
-        String uploadDir = "C:\\Users\\hoang\\Desktop\\ptpm\\coffeeshop\\ui\\public\\assets\\img";
-        String originalFilename  = productImage.getOriginalFilename();
+        
+        String originalFilename  = productImage.getOriginalFilename(); //lay duong dan cua anh
+        System.out.println(originalFilename);
         // Loại bỏ khoảng trắng và dấu từ tên tệp
         String sanitizedFilename = originalFilename.replaceAll("\\s+", "_"); // Thay thế khoảng trắng bằng dấu gạch dưới
         sanitizedFilename = sanitizedFilename.replaceAll("[^a-zA-Z0-9._-]", ""); // Loại bỏ các ký tự không hợp lệ
         String fileName = "coffe_"+ sanitizedFilename;
         Path filePath = Path.of(uploadDir, fileName);
 
-        Files.copy(productImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+        Files.copy(productImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);//thay the bang anh moi
 
         // Đặt tên hình ảnh cho đối tượng Product
         product.setProductImage(fileName);
@@ -70,27 +73,11 @@ public class ProductServiceImpl implements ProductService {
 
 
 
-    //  @Override
-    // public Product saveProduct(Product product, MultipartFile imageFile) throws IOException {
-    //     // Lưu trữ tệp hình ảnh trong thư mục cụ thể (hoặc thư mục bạn chọn)
-    //     String uploadDir = "path/to/your/image/folder";
-    //     String fileName = imageFile.getOriginalFilename();
-    //     Path filePath = Path.of(uploadDir, fileName);
-
-    //     Files.copy(imageFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-    //     // Đặt tên hình ảnh cho đối tượng Product
-    //     product.setImageFileName(fileName);
-
-    //     // Lưu đối tượng Product vào cơ sở dữ liệu
-    //     return productRepository.save(product);
-    // }
-  // Trong ProductService
   public Product deserializeProductFromJson(String productJson) {
     try {
         if (productJson != null) {
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(productJson, Product.class);
+            return objectMapper.readValue(productJson, Product.class); // chhuyeenr tu json sang doi tuong product
         } else {
             // Xử lý trường hợp chuỗi JSON là null
             throw new IllegalArgumentException("JSON string is null");
@@ -111,5 +98,60 @@ public class ProductServiceImpl implements ProductService {
             throw new ResourceNotFoundException("Failed to delete product", e);
         }
     }
-    
+
+
+
+
+
+
+//put
+
+
+
+@Override
+public Product updateProduct(Long id, Product updatedProduct, MultipartFile productImage) throws IOException {
+    Product existingProduct = findProductById(id);
+
+    if (existingProduct == null) {
+        throw new ResourceNotFoundException("Product not found");
+    }
+
+    try {
+        // Xóa tệp hình ảnh cũ
+        if (existingProduct.getProductImage() != null) {
+            Path oldFilePath = Paths.get(uploadDir, existingProduct.getProductImage());
+            Files.deleteIfExists(oldFilePath);
+        }
+
+        // Kiểm tra và tạo thư mục uploadDir nếu nó không tồn tại
+        Path uploadDirPath = Paths.get(uploadDir);
+        if (!Files.exists(uploadDirPath)) {
+            Files.createDirectories(uploadDirPath);
+        }
+
+        String originalFilename = productImage.getOriginalFilename();
+        String sanitizedFilename = originalFilename.replaceAll("\\s+", "_");
+        sanitizedFilename = sanitizedFilename.replaceAll("[^a-zA-Z0-9._-]", "");
+        String fileName = "coffe_" + sanitizedFilename;
+        Path filePath = Paths.get(uploadDir, fileName);
+
+        Files.copy(productImage.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        // Cập nhật thông tin sản phẩm
+        existingProduct.setCategoryId(updatedProduct.getCategoryId());
+        existingProduct.setProductName(updatedProduct.getProductName());
+        existingProduct.setProductDescription(updatedProduct.getProductDescription());
+        existingProduct.setProductPrice(updatedProduct.getProductPrice());
+        existingProduct.setProductImage(fileName);
+        existingProduct.setStockQuantity(updatedProduct.getStockQuantity());
+
+        
+        return productRepository.save(existingProduct);
+    } catch (IOException e) {
+        e.printStackTrace();
+        throw new RuntimeException("Failed to update product: " + e.getMessage(), e);
+    }
+}
+
+
 }

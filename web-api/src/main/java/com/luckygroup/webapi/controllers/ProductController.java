@@ -60,16 +60,7 @@ public class ProductController {
     }
 
   
-    //                 HttpStatus.OK,
-    //                 "Product saved successfully",
-    //                 savedProduct);
-    //     } catch (Exception e) {
-    //         return ResponseHandler.generateResponse(
-    //                 HttpStatus.INTERNAL_SERVER_ERROR,
-    //                 "Cannot save product",
-    //                 null);
-    //     }
-    // }
+   
 
     @DeleteMapping("/product/{id}")
     public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
@@ -87,45 +78,7 @@ public class ProductController {
         }
     }
 
-      // @PostMapping("/product")
-    // public ResponseEntity<Object> saveProduct(@RequestBody Product product) {
-    // try {
-    // Product savedProduct = productService.saveProduct(product);
-    // return ResponseHandler.generateResponse(
-    // HttpStatus.OK,
-    // "Product saved successfully",
-    // savedProduct
-    // );
-    // } catch (Exception e) {
-    // return ResponseHandler.generateResponse(
-    // HttpStatus.INTERNAL_SERVER_ERROR,
-    // "Cannot save product",
-    // null
-    // );
-    // }
-    // }
-
-    // @PostMapping("/product")
-    // public ResponseEntity<Object> saveProduct(
-    //         @RequestParam("file") MultipartFile file,
-    //         @RequestParam("product") String productJson) {
-    //     try {
-    //         // Lưu trữ tệp hình ảnh trong thư mục cụ thể (hoặc thư mục bạn chọn)
-    //         String uploadDir = "C:\\Users\\hoang\\Desktop\\ptpm\\coffeeshop\\ui\\public\\assets\\img";
-    //         String fileName = file.getOriginalFilename();
-    //         Path filePath = Path.of(uploadDir, fileName);
-    //         Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-    //         // Tạo đối tượng Product từ JSON bằng cách sử dụng ProductService
-    //         Product product = productService.deserializeProductFromJson(productJson);
-
-    //         // Đặt tên hình ảnh cho đối tượng Product
-    //         product.setImageFileName(fileName);
-
-    //         // Lưu đối tượng Product vào cơ sở dữ liệu
-    //         Product savedProduct = productService.saveProduct(product, file);
-
-    //         return ResponseHandler.generateResponse(
+    
 
     @PostMapping("/product")
     public ResponseEntity<Object> handleImageUpload(@RequestParam("file") MultipartFile file,
@@ -136,10 +89,30 @@ public class ProductController {
 
             // Lưu thông tin sản phẩm và tên tệp ảnh vào cơ sở dữ liệu
             Product savedProduct = productService.saveProduct(product, file);
-
             return ResponseEntity.ok(savedProduct);
         } catch (IOException e) {
             return ResponseEntity.status(500).body("Failed to process image upload: " + e.getMessage());
+        }
+    }
+
+
+    
+    @PutMapping("/product/{id}")
+    public ResponseEntity<Object> updateProduct(@PathVariable Long id,
+                                               @RequestParam("file") MultipartFile file,
+                                               @RequestParam("productJson") String productJson) {
+        try {
+            Product updatedProduct = productService.updateProduct(id, productService.deserializeProductFromJson(productJson), file);
+            return ResponseHandler.generateResponse(
+                    HttpStatus.OK,
+                    "Product updated successfully",
+                    updatedProduct);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseHandler.generateResponse(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Failed to process image upload: " + e.getMessage(),
+                    null);
         }
     }
     

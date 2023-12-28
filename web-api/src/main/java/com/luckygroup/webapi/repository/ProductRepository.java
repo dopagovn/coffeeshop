@@ -14,7 +14,5 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> findById(int id);
     List<Product> findByCategoryId(int categoryId);
     Optional<Product> deleteById(int id);
-
-    // Thêm phương thức tìm kiếm Product theo tên hình ảnh
     Optional<Product> findByProductImage(String productImage);
 }
