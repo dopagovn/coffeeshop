@@ -1,35 +1,42 @@
 package com.luckygroup.webapi.models;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "product")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "category"})
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
- 
+
+    
     private int id;
+   
+
+    
+
+
+    private int categoryId;
+
+  
     private String productName;
 
     private String productDescription;
 
-    private double productPrice;
 
-    @Column(name = "product_image")
+    private int productPrice;
+
+     @Column(name = "product_image")
     private String productImage;
 
     private int stockQuantity;
-
 
     // Constructors
     public Product() {
         super();
     }
 
-    public Product(String productName, String productDescription, double productPrice, String productImage, int stockQuantity) {
+    public Product(int categoryId, String productName, String productDescription, int productPrice, String productImage, int stockQuantity) {
+        this.categoryId = categoryId;
         this.productName = productName;
         this.productDescription = productDescription;
         this.productPrice = productPrice;
@@ -43,6 +50,14 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getProductName() {
@@ -61,7 +76,7 @@ public class Product {
         this.productDescription = productDescription;
     }
 
-    public Double getProductPrice() {
+    public int getProductPrice() {
         return productPrice;
     }
 
@@ -84,10 +99,4 @@ public class Product {
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
-
-    @ManyToOne
-@JoinColumn(name = "category_id")
-private Category category;
-
 }
-

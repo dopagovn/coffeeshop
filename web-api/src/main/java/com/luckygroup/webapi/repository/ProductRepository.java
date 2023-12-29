@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 import com.luckygroup.webapi.models.Product;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Optional<Product> findById(int id);
+    Optional<Product> findById(Long id);
     List<Product> findByCategoryId(int categoryId);
     Optional<Product> deleteById(int id);
 }

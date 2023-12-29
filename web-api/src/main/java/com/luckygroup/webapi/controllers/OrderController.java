@@ -12,11 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.luckygroup.webapi.common.ResponseHandler;
-import com.luckygroup.webapi.models.Accounts;
 import com.luckygroup.webapi.models.Order;
 import com.luckygroup.webapi.models.OrderRequest;
 import com.luckygroup.webapi.models.PlaceOrderRequest;
-import com.luckygroup.webapi.repository.OrderRepository;
 import com.luckygroup.webapi.services.OrderService;
 
 @Controller
@@ -24,12 +22,8 @@ import com.luckygroup.webapi.services.OrderService;
 @RequestMapping(path = "/api/v1")
 public class OrderController {
 
-    private final OrderService orderService;
     @Autowired
-    public OrderController(OrderService orderService) {
-        this.orderService = orderService;
-
-    }
+    private  OrderService orderService;
 
     @GetMapping(path = "/order/{id}")
     public ResponseEntity<Object> getOrderById(@PathVariable Long id) {
